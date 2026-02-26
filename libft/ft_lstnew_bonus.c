@@ -6,12 +6,14 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 14:11:04 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/02/26 13:00:31 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/02/26 15:25:28 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+// si type == 0 == ce nes pas un double tableau
+// si type == 1 == c
 t_garbage	*ft_lstnew(void *content, int type)
 {
 	t_garbage	*new;
@@ -19,9 +21,9 @@ t_garbage	*ft_lstnew(void *content, int type)
 	new = malloc(sizeof(t_garbage));
 	if (new == NULL)
 		return (NULL);
-	if (!(type)) // si c un double tableau
+	if (type) // si c un double tableau
 		new->is_2d_array = 1;
-	else if (type) // sinon
+	else // sinon
 		new->is_2d_array = 0;
 	new->data = content;
 	new->next = NULL;

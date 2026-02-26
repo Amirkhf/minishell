@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 08:27:35 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/02/26 12:22:36 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/02/26 15:56:33 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ int	main(int argc, char **argv, char **env)
 {
 	t_data	data;
 
-	// argv = NULL;
-	// argc = 0;
-	init_struct_data(&data,env);
-	for (int i = 0; data.env[i]; i++)
+	init_struct(&data, env);
+	while (1)
 	{
-		printf("%s\n", data.env[i]);
+		data.line = readline("test : ");
+		gc_add(&data.lst_free, data.line, STRING);
 	}
+	return (free_all(data.lst_free), EXIT_SUCCESS);
 }

@@ -5,4 +5,8 @@ git push origin "amir"
 chamger de branch
 git checkout "main"
 push mon travaille sur ma branch
-J
+git add *
+
+git commit -m "ok"
+
+git push origin amir

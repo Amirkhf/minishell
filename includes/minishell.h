@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 08:29:06 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/02/26 13:21:31 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/02/26 15:46:35 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,15 @@
 # define MINI_SHELL_H
 
 # include <limits.h>
+# include <readline/history.h>
+# include <readline/readline.h>
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+
+# define STRING 0     // nous sert dans notre gc
+# define DBL_STRING 1 // nous sert dans notre gc
 
 // struct for garbage_collector
 typedef struct s_garbage
@@ -30,26 +35,23 @@ typedef struct s_garbage
 // contains the variable env
 typedef struct s_data
 {
+	char *line; // contains input
 	char				**env;
-	t_garbage			*head;
+	t_garbage *lst_free; // for free
 }						t_data;
 
 // init struct
-void					init_struct_data(t_data *data, char **env);
+void					init_struct(t_data *data, char **env);
 
 // parsing
-void					extract_path(t_data *data, char **env);
 // libft
 char					**ft_split(char const *s, char c);
 void					free_function(char **str);
 int						ft_strncmp(const char *s1, const char *s2, size_t n);
 size_t					ft_strlen(const char *s);
 t_garbage				*ft_lstnew(void *content, int type);
-void					ft_push_front(t_garbage **head, void *data, int type);
+void					gc_add(t_garbage **head, void *data, int type);
 
-// exec
-
-// utils
-void					add_tab_free(t_data *data, char *str,
-							char **double_str);
+// free
+void					free_all(t_garbage *lst);
 #endif
