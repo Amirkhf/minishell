@@ -6,15 +6,15 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 08:39:16 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/02/26 09:05:22 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/02/26 12:39:38 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	init_struct_data(t_data *data)
+// initialise la struct est recupere
+// la variable denvironnement env
+void	init_struct_data(t_data *data, char **env)
 {
-	data->env = NULL;
-	data->tab_free = NULL;
-	data->nb_free = 0;
+	data->env = env;
 }

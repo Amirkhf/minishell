@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstadd_front_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/26 08:27:35 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/02/26 12:22:36 by amkhelif         ###   ########.fr       */
+/*   Created: 2025/11/12 15:06:25 by amkhelif          #+#    #+#             */
+/*   Updated: 2026/02/26 12:57:31 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	main(int argc, char **argv, char **env)
-{
-	t_data	data;
+//  met la nouvelle tete en tete de liste
+// fait pointer new->next a lancienne tete
 
-	// argv = NULL;
-	// argc = 0;
-	init_struct_data(&data,env);
-	for (int i = 0; data.env[i]; i++)
-	{
-		printf("%s\n", data.env[i]);
-	}
+void	ft_lstadd_front(t_garbage **lst, t_garbage *new)
+{
+	new->next = *lst;
+	*lst = new;
 }
