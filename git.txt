@@ -1,0 +1,4 @@
+cree une branche
+git checkout -b "amir"
+push la branche
+git push origin amir
