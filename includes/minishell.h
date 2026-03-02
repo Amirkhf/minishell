@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 08:29:06 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/02 14:30:19 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/02 14:54:41 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef enum s_lexer_type
 	OUTFILE,
 	REDIR_IN,
 	REDIR_OUT,
+	CMD,
 	HERDOC
 }						t_lexer_type;
 
@@ -79,9 +80,10 @@ void					free_all(t_garbage *lst);
 // lexer
 bool					verif_quote(char *line);
 bool					space_or_tab(char c);
-int						is_sign(char c);
+bool						is_sign(char c);
 void					add_token(t_garbage **head_gc, t_token **head_token,
 							t_lexer_type *type, char *value);
+t_lexer_type			*token_type(char c);
 // main
 void					loop(t_data *data);
 #endif
