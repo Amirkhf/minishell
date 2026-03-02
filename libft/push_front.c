@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 13:03:08 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/02 12:03:32 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/02 12:41:16 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,20 @@ void	gc_add(t_garbage **head, void *data, int type)
 	*head = new;                 // head is new node
 }
 
-void	add_token(t_token **head, t_garbage **lst_free, char *value, t_token_type *type)
+void	add_token(t_garbage **head_gc, t_token *head_token, t_lexer_type *type,
+		char *value)
 {
+	t_token *tmp;
 	t_token *new_token;
 
-	new_token = lst_new_token(lst_free, value, type);
-	new_token->next = *head;
-	*head = new_token;
+	tmp = head_token;
+	if (!(tmp))
+		return (NULL);
+
+	while (tmp != NULL)
+	{
+		tmp = tmp->next;
+	}
+	new_token = lst_new_token(head_gc, type, value);
+	tmp->next = new_token;
 }

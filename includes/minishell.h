@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 08:29:06 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/02 12:03:58 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/02 12:38:48 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,36 +21,33 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define STRING 0     // nous sert dans notre gc
-# define DBL_STRING 1 // nous sert dans notre gc
+# define STRING 0
+# define DBL_STRING 1
 
 // struct for garbage_collector
 typedef struct s_garbage
 {
-	bool is_2d_array; // is a double char ?
+	bool				is_2d_array;
 	void				*data;
 	struct s_garbage	*next;
 }						t_garbage;
 
 // struct for lexer
 
-typedef enum s_token_type
+typedef enum s_lexer_type
 {
 	PIPE,
-	CMD,
-	REDIR_IN,
-	REDIRECTION_IN,
-	REDIRECTION_OUT,
 	INFILE,
 	OUTFILE,
-}						t_token_type;
+	REDIR_IN,
+	REDIR_OUT,
+}						t_lexer_type;
 
 typedef struct s_token
 {
 	char				*value;
-	t_token_type		type;
+	t_lexer_type		*type;
 	struct s_token		*next;
-
 }						t_token;
 
 // contains the variable env
@@ -70,22 +67,15 @@ void					init_struct(t_data *data, char **env);
 char					**ft_split(char const *s, char c);
 void					free_function(char **str);
 int						ft_strncmp(const char *s1, const char *s2, size_t n);
+void					gc_add(t_garbage **head, void *data, int type);
 size_t					ft_strlen(const char *s);
 t_garbage				*ft_lstnew(void *content, int type);
-void					gc_add(t_garbage **head, void *data, int type);
-
+t_token					*lst_new_token(t_garbage **head, t_lexer_type *type,
+							char *value);
 // free
 void					free_all(t_garbage *lst);
 
 // lexer
-int						lexer_funtion(t_garbage **lst_free, t_token *token,
-							char *line);
-t_token					*lst_new_token(t_garbage **free_lst, char *value,
-							char *type);
-void					add_token(t_token **head, t_garbage **lst_free,
-							char *value, char *type);
-void					add_token(t_token **head, t_garbage **lst_free,
-							char *value, t_token_type *type);
 
 // main
 void					loop(t_garbage *garbage, t_data *data);

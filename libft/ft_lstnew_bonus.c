@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 14:11:04 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/02 11:43:35 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/02 12:38:21 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,16 @@ t_garbage	*ft_lstnew(void *value, int type)
 	return (new);
 }
 
-// funtciotn create a new node for lst t_token
-t_token	*lst_new_token(t_garbage **free_lst, char *value, char *type)
+// cree le nouveau jeton
+t_token	*lst_new_token(t_garbage **head, t_lexer_type *type, char *value)
 {
-	t_token	*new;
+	t_token *new_token;
 
-	new = malloc(sizeof(t_token));
-	if (!(new))
+	new_token = malloc(sizeof(t_token));
+	if (!(new_token))
 		return (NULL);
-	new->value = value;
-	new->type = type;
-	new->next = NULL;
-	gc_add(free_lst, new, STRING);
-		// voir par la suite si on garde ? (elle est peut etre mal placer)
+	new_token->value = value;
+	new_token->type = type;
+	new_token->next = NULL;
+	return (new_token);
 }
