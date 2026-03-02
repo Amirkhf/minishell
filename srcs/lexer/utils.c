@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 13:45:08 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/02 14:54:46 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/02 15:13:41 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ bool	is_sign(char c)
 	return (0);
 }
 
-t_lexer_type	*token_type(char c)
+t_lexer_type	token_type(char c)
 {
 	if (c == '|')
 		return (PIPE);

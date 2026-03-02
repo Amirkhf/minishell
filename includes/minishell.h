@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 08:29:06 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/02 14:54:41 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/02 18:18:41 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,19 +71,22 @@ void					free_function(char **str);
 int						ft_strncmp(const char *s1, const char *s2, size_t n);
 void					gc_add(t_garbage **head, void *data, int type);
 size_t					ft_strlen(const char *s);
-t_garbage				*ft_lstnew(void *content, int type);
-t_token					*lst_new_token(t_garbage **head, t_lexer_type *type,
+t_garbage				*ft_lstnew(t_data *data, void *value, int type);
+t_token					*lst_new_token(t_garbage **head_gc, t_lexer_type *type,
 							char *value);
 // free
 void					free_all(t_garbage *lst);
-
+void					*my_malloc(t_garbage **head_gc, int len);
 // lexer
 bool					verif_quote(char *line);
 bool					space_or_tab(char c);
-bool						is_sign(char c);
+bool					is_sign(char c);
 void					add_token(t_garbage **head_gc, t_token **head_token,
-							t_lexer_type *type, char *value);
-t_lexer_type			*token_type(char c);
+							t_lexer_type type, char *value);
+t_lexer_type			token_type(char c);
+char					*take_cmd(t_data *data, char *line, int i);
+
+char					*token_line(t_data *data, t_token *token, char *line);
 // main
 void					loop(t_data *data);
 #endif
