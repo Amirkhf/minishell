@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 08:29:06 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/02/26 15:46:35 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/02 12:03:58 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,27 @@ typedef struct s_garbage
 	struct s_garbage	*next;
 }						t_garbage;
 
+// struct for lexer
+
+typedef enum s_token_type
+{
+	PIPE,
+	CMD,
+	REDIR_IN,
+	REDIRECTION_IN,
+	REDIRECTION_OUT,
+	INFILE,
+	OUTFILE,
+}						t_token_type;
+
+typedef struct s_token
+{
+	char				*value;
+	t_token_type		type;
+	struct s_token		*next;
+
+}						t_token;
+
 // contains the variable env
 typedef struct s_data
 {
@@ -44,6 +65,7 @@ typedef struct s_data
 void					init_struct(t_data *data, char **env);
 
 // parsing
+
 // libft
 char					**ft_split(char const *s, char c);
 void					free_function(char **str);
@@ -54,4 +76,17 @@ void					gc_add(t_garbage **head, void *data, int type);
 
 // free
 void					free_all(t_garbage *lst);
+
+// lexer
+int						lexer_funtion(t_garbage **lst_free, t_token *token,
+							char *line);
+t_token					*lst_new_token(t_garbage **free_lst, char *value,
+							char *type);
+void					add_token(t_token **head, t_garbage **lst_free,
+							char *value, char *type);
+void					add_token(t_token **head, t_garbage **lst_free,
+							char *value, t_token_type *type);
+
+// main
+void					loop(t_garbage *garbage, t_data *data);
 #endif

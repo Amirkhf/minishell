@@ -13,7 +13,7 @@
 #include "../../includes/minishell.h"
 
 
-// this function its for init a struct data
+// this function is for initializing a struct data
 void	init_struct(t_data *data, char **env)
 {
 	data->env = env;
