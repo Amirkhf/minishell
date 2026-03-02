@@ -6,7 +6,7 @@
 #    By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/26 09:36:23 by amkhelif          #+#    #+#              #
-#    Updated: 2026/03/02 10:32:24 by amkhelif         ###   ########.fr        #
+#    Updated: 2026/03/02 13:52:20 by amkhelif         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRC = srcs/main.c \
 		libft/push_front.c\
 		srcs/utils/free.c\
 		srcs/lexer/lexer.c\
+		srcs/lexer/utils.c\
 		srcs/init/init_struct.c
 
 OBJ = $(SRC:.c=.o)

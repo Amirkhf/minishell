@@ -1,33 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/26 14:18:20 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/02 14:02:17 by amkhelif         ###   ########.fr       */
+/*   Created: 2026/03/02 13:45:08 by amkhelif          #+#    #+#             */
+/*   Updated: 2026/03/02 14:34:45 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-// free everything we have malloced
-void	free_all(t_garbage *lst)
+// check double quote
+bool	verif_quote(char *line)
 {
-	t_garbage	*tmp;
+	int	i;
+	int	open;
 
-	while (lst != NULL)
+	open = 0;
+	i = 0;
+	while (line[i])
 	{
-		tmp = lst->next;
-		if (lst->data)
-		{
-			if (lst->is_2d_array)
-				free_function(lst->data);
-			else
-				free(lst->data);
-		}
-		free(lst);
-		lst = tmp;
+		if (line[i] == '"')
+			open++;
+		i++;
 	}
+	if (open % 2 != 0)
+		return (1);
+	return (0);
+}
+// check if is it a space or tabulation
+bool	space_or_tab(char c)
+{
+	int	i;
+
+	i = 0;
+	if (c == ' ' || c == '\t')
+		return (1);
+	return (0);
+}
+
+// is '|' or '<' or '>'
+bool	is_sign(char c)
+{
+	if (c == '|' || c == '<' || c == '>')
+		return (1);
+	return (0);
 }
