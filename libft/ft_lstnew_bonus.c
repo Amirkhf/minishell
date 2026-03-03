@@ -6,14 +6,14 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 14:11:04 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/03 13:36:19 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/03 17:20:45 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 // cree le noeud pour le gc
-t_garbage	*ft_lstnew_gc(void *value)
+t_garbage	*ft_lstnew_gc(t_data *data, void *value)
 {
 	t_garbage	*new_node;
 
@@ -26,11 +26,11 @@ t_garbage	*ft_lstnew_gc(void *value)
 }
 
 // cree le noeud pour les token
-t_token	*new_token(t_data *data, char *str, t_token_type *type)
+t_token	*new_token(t_data *data, char *str, t_token_type type)
 {
 	t_token	*new;
 
-	new = my_malloc(data, sizeof(t_token), TMP);
+	new = my_malloc(data,sizeof(t_token),TMP);
 	if (!(new))
 		return (NULL);
 	new->type = type;
@@ -39,7 +39,8 @@ t_token	*new_token(t_data *data, char *str, t_token_type *type)
 	return (new);
 }
 
-void	token_add_back(t_token **head, t_token *new)
+// adds a new token to the back of the token list
+void	token_add_back(t_data *data, t_token **head, t_token *new)
 {
 	t_token *tmp;
 

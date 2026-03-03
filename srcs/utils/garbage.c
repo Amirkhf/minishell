@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   garbage.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 16:53:42 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/03 12:17:17 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/03 17:12:54 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,9 @@ void	*my_malloc(t_data *data, size_t size, bool type)
 	memory = malloc(size);
 	if (memory == NULL)
 	{
-		perror("bash :");
 		return (NULL);
 	}
-	if (!(type))
+	if (type == TMP)
 		gc_add(&data->garbage_tmp, memory);
 	else
 		gc_add(&data->garbage_perm, memory);

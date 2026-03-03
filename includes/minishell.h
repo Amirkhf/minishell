@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 08:29:06 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/03 13:38:49 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/03 17:10:18 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 typedef enum e_token_type
 {
 	WORD,
+	CMD,
 	PIPE,
 	REDIR_IN,
 	REDIR_OUT,
@@ -39,6 +40,7 @@ typedef struct s_token
 	char				*str;
 	t_token_type		type;
 	struct s_token		*next;
+	struct s_token		*prev;
 }						t_token;
 
 // struct for garbage_collector
@@ -55,6 +57,7 @@ typedef struct s_data
 	char				**env;
 	t_garbage			*garbage_tmp;
 	t_garbage			*garbage_perm;
+	t_token *token; // liste de token
 }						t_data;
 
 // init struct
@@ -66,6 +69,6 @@ void					*my_malloc(t_data *data, size_t size, bool type);
 void					gc_add(t_garbage **lst, void *data);
 void					free_all(t_garbage **gc);
 size_t					ft_strlen(const char *s);
-t_token					*new_token(t_data *data, char *str, t_token_type *type);
+t_token					*new_token(char *str, t_token_type *type);
 void					token_add_back(t_token **head, t_token *new);
 #endif
