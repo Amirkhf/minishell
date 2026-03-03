@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 08:29:06 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/03 11:30:34 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/03 13:14:03 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define STRING 0
-# define DBL_STRING 1
+# define TMP 0
+# define PERM 1
 
 // struct for garbage_collector
 typedef struct s_garbage
@@ -31,61 +31,21 @@ typedef struct s_garbage
 	struct s_garbage	*next;
 }						t_garbage;
 
-// struct for lexer
-
-typedef enum s_lexer_type
-{
-	PIPE,
-	INFILE,
-	OUTFILE,
-	REDIR_IN,
-	REDIR_OUT,
-	CMD,
-	HERDOC
-}						t_lexer_type;
-
-typedef struct s_token
-{
-	char				*value;
-	t_lexer_type		*type;
-	struct s_token		*next;
-}						t_token;
-
 // contains the variable env
 typedef struct s_data
 {
-	char *line; // contains input
+	char				*line;
 	char				**env;
-	t_garbage *lst_free; // for free
+	t_garbage			*garbage_tmp;
+	t_garbage			*garbage_perm;
 }						t_data;
 
 // init struct
 void					init_struct(t_data *data, char **env);
 
-// parsing
-void					gc_add_front(t_garbage **garbage, t_garbage *new_node);
-// libft
-char					**ft_split(char const *s, char c);
-void					free_function(char **str);
-int						ft_strncmp(const char *s1, const char *s2, size_t n);
-void					gc_add(t_garbage **head, void *data, int type);
-size_t					ft_strlen(const char *s);
-t_garbage				*ft_lstnew(void *value, int type);
-t_token					*lst_new_token(t_garbage **head_gc, t_lexer_type *type,
-							char *value);
-// free
-void					free_all(t_garbage *lst);
-void					*my_malloc(t_garbage **head_gc, int len);
-// lexer
-bool					verif_quote(char *line);
-bool					space_or_tab(char c);
-bool					is_sign(char c);
-void					add_token(t_garbage **head_gc, t_token **head_token,
-							t_lexer_type type, char *value);
-t_lexer_type			token_type(char c);
-char					*take_cmd(t_data *data, char *line, int i);
-
-char					*token_line(t_data *data, t_token *token, char *line);
-// main
-void					loop(t_data *data);
+// for garbage collector
+t_garbage				*ft_lstnew_gc(void *value);
+void					*my_malloc(t_data *data, size_t size, bool type);
+void					gc_add(t_garbage **lst, void *data);
+void					free_all(t_garbage **gc);
 #endif

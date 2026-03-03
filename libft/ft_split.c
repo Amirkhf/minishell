@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 15:37:20 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/02 16:50:58 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/03 12:23:35 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,13 @@ void	free_function(char **str)
 	free(str);
 }
 
-static char	*remplissage(char c, int j, char const *s)
+static char	*remplissage(t_data *data, char c, int j, char const *s)
 {
 	int		a;
 	char	*str;
 
 	a = 0;
-	str = malloc((ft_len(j, s, c) + 1) * sizeof(char));
+	str = my_malloc(data, (ft_len(j, s, c) + 1) * sizeof(char), PERM);
 	if (str == NULL)
 		return (NULL);
 	while (s[j] != c && s[j])
@@ -82,7 +82,7 @@ static char	*remplissage(char c, int j, char const *s)
 	return (str);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(t_data *data, char const *s, char c)
 {
 	char	**str;
 	int		i;
@@ -92,14 +92,14 @@ char	**ft_split(char const *s, char c)
 	i = -1;
 	if (s == NULL)
 		return (NULL);
-	str = malloc((count_word(s, c) + 1) * sizeof(char *));
+	str = my_malloc(data, (count_word(s, c) + 1) * sizeof(char *), PERM);
 	if (str == NULL)
 		return (NULL);
 	while (++i < count_word(s, c))
 	{
 		while (s[j] && s[j] == c)
 			j++;
-		str[i] = remplissage(c, j, s);
+		str[i] = remplissage(data, c, j, s);
 		if (!str[i])
 			return (free_function(str), NULL);
 		while (s[j] && s[j] != c)
