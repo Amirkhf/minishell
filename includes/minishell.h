@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 08:29:06 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/02 18:18:41 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/03 11:30:34 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@
 // struct for garbage_collector
 typedef struct s_garbage
 {
-	bool				is_2d_array;
 	void				*data;
 	struct s_garbage	*next;
 }						t_garbage;
@@ -64,14 +63,14 @@ typedef struct s_data
 void					init_struct(t_data *data, char **env);
 
 // parsing
-
+void					gc_add_front(t_garbage **garbage, t_garbage *new_node);
 // libft
 char					**ft_split(char const *s, char c);
 void					free_function(char **str);
 int						ft_strncmp(const char *s1, const char *s2, size_t n);
 void					gc_add(t_garbage **head, void *data, int type);
 size_t					ft_strlen(const char *s);
-t_garbage				*ft_lstnew(t_data *data, void *value, int type);
+t_garbage				*ft_lstnew(void *value, int type);
 t_token					*lst_new_token(t_garbage **head_gc, t_lexer_type *type,
 							char *value);
 // free

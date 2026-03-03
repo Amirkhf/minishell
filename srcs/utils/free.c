@@ -6,28 +6,8 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 14:18:20 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/02 14:02:17 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/03 11:34:25 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-// free everything we have malloced
-void	free_all(t_garbage *lst)
-{
-	t_garbage	*tmp;
-
-	while (lst != NULL)
-	{
-		tmp = lst->next;
-		if (lst->data)
-		{
-			if (lst->is_2d_array)
-				free_function(lst->data);
-			else
-				free(lst->data);
-		}
-		free(lst);
-		lst = tmp;
-	}
-}
