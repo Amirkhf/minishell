@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 13:45:08 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/04 14:58:51 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/04 16:21:48 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,31 @@ bool	is_space(char c)
 	if (c == ' ' || c == '\t')
 		return (1);
 	return (0);
+}
+
+// Ajoute un token à la liste
+bool	add_token(t_data *data, t_token **token_lst, t_token_type type,
+		char *value)
+{
+	t_token *new;
+	t_token *tmp;
+
+	new = new_token(data, value, type);
+	if (!(new))
+	{
+		perror("");
+		return (0);
+	}
+	if (*token_lst == NULL)
+	{
+		(*token_lst) = new;
+		new->prev = NULL;
+		return (1);
+	}
+	tmp = *token_lst;
+	while (tmp->next != NULL)
+		tmp = tmp->next;
+	new->prev = tmp;
+	tmp->next = new;
+	return (1);
 }
