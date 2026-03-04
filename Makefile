@@ -6,7 +6,7 @@
 #    By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/26 09:36:23 by amkhelif          #+#    #+#              #
-#    Updated: 2026/03/04 14:18:15 by amkhelif         ###   ########.fr        #
+#    Updated: 2026/03/04 18:35:46 by amkhelif         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,12 +18,16 @@ SRC = srcs/main.c \
 		libft/ft_strncmp.c \
 		libft/ft_strlen.c \
 		libft/ft_lstnew_bonus.c\
+		libft/ft_lstsize_bonus.c\
+		libft/ft_strdup.c\
 		srcs/utils/free.c\
 		srcs/lexer/lexer.c\
 		srcs/lexer/utils.c\
 		srcs/lexer/readline.c\
 		srcs/utils/garbage.c\
-		srcs/init/init_struct.c
+		srcs/init/init_struct.c\
+		srcs/parsing/parsing.c\
+		srcs/parsing/utils.c
 
 OBJ = $(SRC:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 08:29:06 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/04 16:15:30 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/04 18:35:10 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,9 @@ typedef struct s_data
 
 // libft
 int						ft_strncmp(const char *s1, const char *s2, size_t n);
-
+char					*ft_strdup(t_data *data, const char *s);
+int						check_lexer(t_data *data, t_token **token);
+int						parsing(t_data *data, t_token **token);
 // init struct
 void					init_struct(t_data *data, char **env);
 
@@ -78,6 +80,7 @@ void					token_add_back(t_data *data, t_token **head,
 // for token_line
 t_token					*token_line(t_data *data);
 int						my_readline(t_data *data);
+void					syntax_error(char *str);
 
 // for free
 void					my_exit(t_garbage **gc_tmp, t_garbage **gc_perm,
@@ -94,11 +97,11 @@ int						what_operator(char *str, int *i);
 
 int						take_cmd(t_data *data, t_token **token_lst, char *str,
 							int *i);
-
+void					syntax_error(char *str);
 // delete
 void					print_token(t_data *data);
 void					take_big_operator(t_data *data, int operator, int * i);
 void					take_small_operator(t_data *data, int operator, int
 							* i);
-
+int						ft_lstsize_lexer(t_token *lst);
 #endif
