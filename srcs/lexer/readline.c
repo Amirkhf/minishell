@@ -1,37 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   readline.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/10 16:47:15 by amkhelif          #+#    #+#             */
+/*   Created: 2026/03/04 14:14:03 by amkhelif          #+#    #+#             */
 /*   Updated: 2026/03/04 14:31:03 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
-// Compare n caractères de deux chaînes
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+// Lit une ligne de commande
+int	my_readline(t_data *data)
 {
-	size_t	i;
-
-	i = 0;
-	while ((s1[i] || s2[i]) && (i < n))
-	{
-		if (s1[i] != s2[i])
-			return ((unsigned char)(s1[i]) - (unsigned char)(s2[i]));
-		i++;
-	}
-	return (0);
+	data->line = readline("test : ");
+	if (!(data->line))
+		return (0);
+	gc_add(&data->garbage_tmp, data->line);
+	return (1);
 }
-// int	main(void)
-// {
-// 	char		*str;
-// 	const char	*str_1 = "abcdefgh";
-
-// 	str = "abcdwxyz";
-// 	printf("%d\n", ft_strncmp(str, str_1, 4));
-// 	printf("%d\n", strncmp(str, str_1, 4));
-// }

@@ -6,14 +6,13 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 16:53:42 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/03 17:12:54 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/04 14:39:28 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-// if type = 0  add tp TMP
-// if type = 1   PERM
+// Alloue de la mémoire et l'ajoute au GC
 void	*my_malloc(t_data *data, size_t size, bool type)
 {
 	void	*memory;
@@ -30,9 +29,10 @@ void	*my_malloc(t_data *data, size_t size, bool type)
 	return (memory);
 }
 
+// Ajoute un bloc mémoire au GC
 void	gc_add(t_garbage **lst, void *data)
 {
-	t_garbage *node;
+	t_garbage	*node;
 
 	node = ft_lstnew_gc(data);
 	if (!node)
@@ -44,3 +44,21 @@ void	gc_add(t_garbage **lst, void *data)
 	node->next = *lst;
 	*lst = node;
 }
+
+// Affiche les tokens pour le débogage
+void	print_token(t_data *data)
+{
+	t_token	*tmp;
+
+	tmp = data->token;
+	while (tmp)
+	{
+		printf("--------------------\n");
+		printf("Value : [%s]\n", tmp->str);
+		printf("Type  : %d\n", tmp->type);
+		tmp = tmp->next;
+	}
+	printf("--------------------\n");
+}
+
+// -----------------------------------------------------------------------------------

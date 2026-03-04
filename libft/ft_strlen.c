@@ -6,12 +6,13 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 12:08:05 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/02/26 09:50:04 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/04 14:31:03 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+// Calcule la longueur d'une chaîne
 size_t	ft_strlen(const char *s)
 {
 	size_t	i;

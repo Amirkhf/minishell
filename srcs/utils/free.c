@@ -6,12 +6,13 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 14:18:20 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/04 11:48:00 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/04 14:31:03 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+// Libère toute la mémoire d'une liste GC
 void	free_all(t_garbage **gc)
 {
 	t_garbage	*tmp;
@@ -31,7 +32,7 @@ void	free_all(t_garbage **gc)
 	*gc = NULL;
 }
 
-// for a exit programme 
+// Libère la mémoire et quitte le programme
 void	my_exit(t_garbage **gc_tmp, t_garbage **gc_perm, int exit_status)
 {
 	free_all(gc_tmp);

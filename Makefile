@@ -6,7 +6,7 @@
 #    By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/26 09:36:23 by amkhelif          #+#    #+#              #
-#    Updated: 2026/03/04 12:33:17 by amkhelif         ###   ########.fr        #
+#    Updated: 2026/03/04 14:18:15 by amkhelif         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRC = srcs/main.c \
 		srcs/utils/free.c\
 		srcs/lexer/lexer.c\
 		srcs/lexer/utils.c\
+		srcs/lexer/readline.c\
 		srcs/utils/garbage.c\
 		srcs/init/init_struct.c
 

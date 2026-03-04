@@ -6,12 +6,13 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 15:37:20 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/03 12:23:35 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/04 14:31:03 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+// Compte le nombre de mots
 static int	count_word(char const *str, char c)
 {
 	int	i;
@@ -37,6 +38,7 @@ static int	count_word(char const *str, char c)
 	return (count);
 }
 
+// Calcule la longueur du prochain mot
 static int	ft_len(int j, char const *s, char c)
 {
 	int	i;
@@ -50,6 +52,7 @@ static int	ft_len(int j, char const *s, char c)
 	return (i);
 }
 
+// Libère un tableau de chaînes
 void	free_function(char **str)
 {
 	int	i;
@@ -63,6 +66,7 @@ void	free_function(char **str)
 	free(str);
 }
 
+// Crée une chaîne avec le prochain mot
 static char	*remplissage(t_data *data, char c, int j, char const *s)
 {
 	int		a;
@@ -82,6 +86,7 @@ static char	*remplissage(t_data *data, char c, int j, char const *s)
 	return (str);
 }
 
+// Divise une chaîne en tableau de mots
 char	**ft_split(t_data *data, char const *s, char c)
 {
 	char	**str;

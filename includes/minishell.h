@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 08:29:06 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/04 12:51:48 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/04 16:15:30 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void					token_add_back(t_data *data, t_token **head,
 
 // for token_line
 t_token					*token_line(t_data *data);
+int						my_readline(t_data *data);
 
 // for free
 void					my_exit(t_garbage **gc_tmp, t_garbage **gc_perm,
@@ -89,9 +90,15 @@ bool					add_token(t_data *data, t_token **token_lst,
 							t_token_type type, char *value);
 bool					is_space(char c);
 bool					is_operator(char c);
-int						what_operator(t_data *data, t_token **token_lst,
-							char *str, int *i);
+int						what_operator(char *str, int *i);
+
 int						take_cmd(t_data *data, t_token **token_lst, char *str,
 							int *i);
+
+// delete
+void					print_token(t_data *data);
+void					take_big_operator(t_data *data, int operator, int * i);
+void					take_small_operator(t_data *data, int operator, int
+							* i);
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 14:11:04 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/04 12:34:13 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/04 14:49:13 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-// cree le noeud pour le gc
+// Crée un noeud pour le GC
 t_garbage	*ft_lstnew_gc(void *value)
 {
 	t_garbage	*new_node;
@@ -25,7 +25,7 @@ t_garbage	*ft_lstnew_gc(void *value)
 	return (new_node);
 }
 
-// cree le noeud pour les token
+// Crée un nouveau token
 t_token	*new_token(t_data *data, char *str, t_token_type type)
 {
 	t_token	*new;
