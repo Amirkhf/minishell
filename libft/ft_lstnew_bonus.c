@@ -6,14 +6,14 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 14:11:04 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/03 17:20:45 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/04 12:34:13 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 // cree le noeud pour le gc
-t_garbage	*ft_lstnew_gc(t_data *data, void *value)
+t_garbage	*ft_lstnew_gc(void *value)
 {
 	t_garbage	*new_node;
 

@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 08:29:06 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/03 17:10:18 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/04 12:51:48 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,38 @@ typedef struct s_data
 	t_token *token; // liste de token
 }						t_data;
 
+// libft
+int						ft_strncmp(const char *s1, const char *s2, size_t n);
+
 // init struct
 void					init_struct(t_data *data, char **env);
 
 // for garbage collector
-t_garbage				*ft_lstnew_gc(void *value);
 void					*my_malloc(t_data *data, size_t size, bool type);
 void					gc_add(t_garbage **lst, void *data);
 void					free_all(t_garbage **gc);
 size_t					ft_strlen(const char *s);
-t_token					*new_token(char *str, t_token_type *type);
-void					token_add_back(t_token **head, t_token *new);
+t_token					*new_token(t_data *data, char *str, t_token_type type);
+void					token_add_back(t_data *data, t_token **head,
+							t_token *new);
+
+// for token_line
+t_token					*token_line(t_data *data);
+
+// for free
+void					my_exit(t_garbage **gc_tmp, t_garbage **gc_perm,
+							int exit_status);
+t_garbage				*ft_lstnew_gc(void *value);
+//
+int						take_cmd(t_data *data, t_token **token_lst, char *str,
+							int *i);
+bool					add_token(t_data *data, t_token **token_lst,
+							t_token_type type, char *value);
+bool					is_space(char c);
+bool					is_operator(char c);
+int						what_operator(t_data *data, t_token **token_lst,
+							char *str, int *i);
+int						take_cmd(t_data *data, t_token **token_lst, char *str,
+							int *i);
+
 #endif
