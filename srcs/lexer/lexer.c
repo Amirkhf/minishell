@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 10:26:25 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/05 13:53:33 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/05 15:04:25 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ t_token	*token_line(t_data *data)
 
 	i = 0;
 	data->token = NULL;
+	// if (count_quote(data->line))
+	// 	return (msg_error_quote(),data->token = NULL, data->token);
 	while (data->line[i])
 	{
 		if (is_space(data->line[i]))
@@ -38,3 +40,4 @@ t_token	*token_line(t_data *data)
 	}
 	return (data->token);
 }
+

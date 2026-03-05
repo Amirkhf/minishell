@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 16:53:42 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/04 14:39:28 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/05 15:09:45 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ void	*my_malloc(t_data *data, size_t size, bool type)
 
 	memory = malloc(size);
 	if (memory == NULL)
-	{
 		return (NULL);
-	}
 	if (type == TMP)
 		gc_add(&data->garbage_tmp, memory);
 	else
