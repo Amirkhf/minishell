@@ -6,7 +6,7 @@
 #    By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/26 09:36:23 by amkhelif          #+#    #+#              #
-#    Updated: 2026/03/04 18:35:46 by amkhelif         ###   ########.fr        #
+#    Updated: 2026/03/05 12:49:21 by amkhelif         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ SRC = srcs/main.c \
 		srcs/utils/garbage.c\
 		srcs/init/init_struct.c\
 		srcs/parsing/parsing.c\
-		srcs/parsing/utils.c
+		srcs/parsing/error_msg.c
 
 OBJ = $(SRC:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 08:27:35 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/04 18:34:29 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/05 13:53:24 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,16 @@ void	loop(t_data *data)
 			break ;
 		add_history(data->line);
 		token = token_line(data);
+		if (token == NULL)
+		{
+			free_all(&data->garbage_tmp);
+			continue ;
+		}
 		print_token(data);
 		if (parsing(data, &token))
 		{
 			free_all(&data->garbage_tmp);
-			continue;
+			continue ;
 		}
 		free_all(&data->garbage_tmp);
 	}

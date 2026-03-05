@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 08:29:06 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/04 18:35:10 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/05 13:02:17 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 # define TMP 0
 # define PERM 1
-
+# define QUOTE '"'
 typedef enum e_token_type
 {
 	WORD,
@@ -104,4 +104,6 @@ void					take_big_operator(t_data *data, int operator, int * i);
 void					take_small_operator(t_data *data, int operator, int
 							* i);
 int						ft_lstsize_lexer(t_token *lst);
+void					msg_error_quote(void);
+char					*take_quote(t_data *data, char *str, int *i, int j);
 #endif

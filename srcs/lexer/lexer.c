@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 10:26:25 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/04 16:22:34 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/05 13:53:33 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_token	*token_line(t_data *data)
 		else
 		{
 			if (!(take_cmd(data, &data->token, data->line, &i)))
-				my_exit(&data->garbage_tmp, &data->garbage_perm, 1);
+				return (data->token = NULL, data->token);
 		}
 	}
 	return (data->token);

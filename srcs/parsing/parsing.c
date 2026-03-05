@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 16:24:26 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/04 18:43:45 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/05 11:41:58 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int	check_lexer(t_data *data, t_token **token)
 	t_token	*tmp;
 
 	tmp = *token;
+	if (!(tmp))
+		return (1);
 	if (tmp->type == PIPE)
 		return (syntax_error("|"), 1);
 	while (tmp->next != NULL)
