@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 10:26:25 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/05 15:04:25 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/05 16:54:37 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_token	*token_line(t_data *data)
 			i++;
 		else if ((operator= what_operator(data->line, &i)) <= 6)
 		{
-			if (operator>= 5 && operator<= 6)
+			if (operator>= HEREDOC && operator<= APPEND)
 				take_big_operator(data, operator, & i);
 			else if (operator!= 0 && operator!= 1)
 				take_small_operator(data, operator, & i);

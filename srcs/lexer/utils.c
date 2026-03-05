@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 13:45:08 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/05 16:10:06 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/05 16:59:38 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,22 @@ int	take_cmd(t_data *data, t_token **token_lst, char *str, int *i)
 	word = my_malloc(data, ft_strlen(str) + 1, TMP);
 	if (word == NULL)
 		my_exit(&data->garbage_tmp, &data->garbage_perm, 1);
-	if (str[*i] == DOUBLE_QUOTE || str[*i] == SIMPLE_QUOTE)
+	if (str[*i] == DOUBLE_QUOTE_c || str[*i] == SIMPLE_QUOTE_c)
 	{
-		word = take_quote(data, str, i, str[*i],&j);
+		word = take_quote(data, str, i, str[*i], &j);
 		if (word == NULL)
 			return (msg_error_quote(), 0);
 	}
-	while (str && str[*i])
+	while (str[*i] && !is_space(str[*i]) && !is_operator(str[*i]))
 	{
-		if (str[*i] == ' ' || str[*i] == '\t')
+		if (is_space(str[*i]))
 			break ;
 		word[j] = str[*i];
 		j++;
 		(*i)++;
 	}
 	word[j] = '\0';
-	add_token(data, token_lst, WORD, word);
+	add_token(data, token_lst, CMD, word);
 	return (1);
 }
 
@@ -45,11 +45,11 @@ int	take_cmd(t_data *data, t_token **token_lst, char *str, int *i)
 //
 char	*take_quote(t_data *data, char *str, int *i, char type_QUOTE, int *j)
 {
-	bool	close_quote;
 	char	*word;
 
 	(*i)++;
-	close_quote = 0;
+	if (str[*i] == type_QUOTE)
+		return (NULL);
 	word = my_malloc(data, ft_strlen(str) + 1, TMP);
 	if (!(word))
 		return (NULL);
@@ -124,55 +124,3 @@ bool	add_token(t_data *data, t_token **token_lst, t_token_type type,
 	tmp->next = new;
 	return (1);
 }
-
-// // recupere a partir de linput tout le texte entre les quote
-// char	*take_quote(t_data *data, char *str, int *i, int j)
-// {
-// 	char	*word;
-// 	int		a;
-
-// 	a = 0;
-// 	word = my_malloc(data, ft_strlen(str) + 1, TMP);
-// 	if (!(word))
-// 		return (NULL);
-// 	(*i)++;
-// 	if (str[*i] == '\0')
-// 		return (NULL);
-// 	while (str[*i != QUOTE] && str[*i])
-// 	{
-// 		word[a] = str[*i];
-// 		a++;
-// 		(*i)++;
-// 	}
-// 	word[a] = '\0';
-// 	return (word);
-// }
-
-// // recupere a partir de linput tout le texte entre les quote
-// char	*take_quote(t_data *data, char *str, int *i, int j)
-// {
-// 	bool	close_quote;
-// 	char	*word;
-
-// 	close_quote = 0;
-// 	word = my_malloc(data, ft_strlen(str) + 1, TMP);
-// 	if (!(word))
-// 		return (NULL);
-// 	(*i)++;
-// 	while (str && str[*i])
-// 	{
-// 		if (str[*i] != QUOTE)
-// 			word[j] = str[*i];
-// 		else if (str[*i] == QUOTE)
-// 		{
-// 			close_quote = 1;
-// 			word[j] = str[*i];
-// 			break ;
-// 		}
-// 		j++;
-// 		(*i)++;
-// 	}
-// 	if (close_quote == 0)
-// 		return (NULL);
-// 	return (word[j] = '\0', word);
-// }

@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 08:29:06 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/05 16:10:52 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/05 17:22:45 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,18 @@
 # define TMP 0
 # define PERM 1
 # define QUOTE '"'
-# define SIMPLE_QUOTE '\''
-# define DOUBLE_QUOTE '\"'
+# define SIMPLE_QUOTE_c '\''
+# define DOUBLE_QUOTE_c '\"'
 
 typedef enum e_token_type
 {
-	WORD,
 	CMD,
+	SIMPLE_QUOTE,
 	PIPE,
 	REDIR_IN,
 	REDIR_OUT,
 	HEREDOC,
-	APPEND,
+	APPEND
 }						t_token_type;
 
 typedef struct s_token
@@ -70,6 +70,7 @@ int						check_lexer(t_data *data, t_token **token);
 int						parsing(t_data *data, t_token **token);
 // init struct
 void					init_struct(t_data *data, char **env);
+int						count_quote(char *str);
 
 // for garbage collector
 void					*my_malloc(t_data *data, size_t size, bool type);
@@ -109,5 +110,4 @@ void					take_small_operator(t_data *data, int operator, int
 							* i);
 int						ft_lstsize_lexer(t_token *lst);
 void					msg_error_quote(void);
-int						count_quote(char *str);
 #endif
