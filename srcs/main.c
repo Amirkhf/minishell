@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 08:27:35 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/05 17:04:04 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/06 14:31:46 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	loop(t_data *data)
 	{
 		if (!(my_readline(data)))
 			continue ;
-		add_history(data->line);
 		token = token_line(data);
 		if (token == NULL)
 		{
