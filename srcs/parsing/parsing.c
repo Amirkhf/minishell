@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 16:24:26 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/09 16:16:02 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/09 17:03:17 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int parsing(t_data *data, t_token **token)
 	return (0);
 }
 
+// plus tard
 int expander(t_data *data, t_token **token)
 {
 	t_token *tmp;
@@ -28,8 +29,11 @@ int expander(t_data *data, t_token **token)
 	tmp = *token;
 	while (tmp)
 	{
-		if (is_double_quote(tmp->str) && is_variable_env(tmp->str))
+		if (is_double_quote(tmp->str) && !(is_variable_env(tmp->str)))
 		{
+			tmp->str = extract_quote(data, tmp->str);
+			if (!(tmp->str))
+				return (EXIT_FAILURE);
 			tmp->str = extract_variable(data, tmp->str);
 			if (!(tmp->str))
 				return (EXIT_FAILURE);
@@ -37,6 +41,19 @@ int expander(t_data *data, t_token **token)
 		tmp = tmp->next;
 	}
 	return (EXIT_SUCCESS);
+}
+
+// fonction principal qui va cree la valeur a partie de ca $
+char *extract_variable(t_data *data, char *str)
+{
+	char *name;
+	long long len_expanded;
+	name = extract_var_name(data, str);
+	if (!(name))
+		my_exit(data->garbage_tmp, data->garbage_perm, EXIT_FAILURE);
+	len_expanded = expanded_len(data, str, name);
+	if (len_expanded < 0)
+		return ("");
 }
 
 // checks for syntax errors

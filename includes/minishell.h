@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 08:29:06 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/09 16:10:46 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/09 16:43:59 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,9 @@ typedef struct s_data
 	t_token *token; // liste de token
 } t_data;
 
+char *extract_quote(t_data *data, char *str);
 // libft
+char *extract_var_name(t_data *data, char *str);
 char **extract_env(t_data *data, char **env);
 char **ft_split(t_data *data, char const *s, char c);
 int ft_strncmp(const char *s1, const char *s2, size_t n);
@@ -95,7 +97,7 @@ size_t ft_strlen(const char *s);
 t_token *new_token(t_data *data, char *str, t_token_type type);
 void token_add_back(t_data *data, t_token **head,
 					t_token *new);
-
+int is_variable_env(char *str);
 // for token_line
 t_token *token_line(t_data *data);
 int my_readline(t_data *data, char **env);
@@ -107,6 +109,7 @@ void my_exit(t_garbage **gc_tmp, t_garbage **gc_perm,
 t_garbage *ft_lstnew_gc(void *value);
 //
 bool is_space(char c);
+char *ft_substr(char const *s, unsigned int start, size_t len);
 
 bool add_token(t_data *data, t_token **token_lst,
 			   t_token_type type, char *value);
