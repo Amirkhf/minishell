@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 17:10:49 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/09 10:58:05 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/09 14:29:45 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,25 @@ void	print_token(t_data *data)
 		tmp = tmp->next;
 	}
 	printf("========================\n\n");
+}
+
+void	print_double_tab(char **str)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (str[i])
+	{
+		j = 0;
+		while (str[i][j])
+		{
+			printf("%c", str[i][j]);
+			j++;
+		}
+		printf("%d \n",i);
+		i++;
+	}
 }
 
 // recupere a partir de linput tout le texte entre les quote

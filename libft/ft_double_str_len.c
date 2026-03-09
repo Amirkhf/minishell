@@ -6,30 +6,19 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 12:32:41 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/09 12:34:43 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/09 14:50:41 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+// calcul la taille dun doubke char
 long long	ft_double_str_len(char **str)
 {
-	int i;
-	int j;
-	int len;
+	int	i;
 
-	len = 0;
-	j = 0;
 	i = 0;
 	while (str[i])
-	{
-		j = 0;
-		while (str[i][j])
-		{
-			j++;
-			len++;
-		}
 		i++;
-	}
-	return (len + 1);
+	return (i + 1);
 }

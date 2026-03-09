@@ -6,13 +6,13 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 16:24:26 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/09 12:21:14 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/09 16:16:02 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	parsing(t_data *data, t_token **token)
+int parsing(t_data *data, t_token **token)
 {
 	printf("je suis dans le parsing\n");
 	if (check_lexer(data, token) || expander(data, &data->token))
@@ -20,15 +20,15 @@ int	parsing(t_data *data, t_token **token)
 	return (0);
 }
 
-int	expander(t_data *data, t_token **token)
+int expander(t_data *data, t_token **token)
 {
-	t_token	*tmp;
+	t_token *tmp;
 
 	printf("je suis dans la fonction expander\n");
 	tmp = *token;
 	while (tmp)
 	{
-		if (is_double_quote(tmp->str))
+		if (is_double_quote(tmp->str) && is_variable_env(tmp->str))
 		{
 			tmp->str = extract_variable(data, tmp->str);
 			if (!(tmp->str))
@@ -40,9 +40,9 @@ int	expander(t_data *data, t_token **token)
 }
 
 // checks for syntax errors
-int	check_lexer(t_data *data, t_token **token)
+int check_lexer(t_data *data, t_token **token)
 {
-	t_token	*tmp;
+	t_token *tmp;
 
 	printf("je suis dans la fonction check_lexer\n");
 	tmp = *token;

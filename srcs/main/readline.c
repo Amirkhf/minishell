@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 14:14:03 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/09 12:31:54 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/09 14:22:54 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ static int	count_quote(char *str);
 // verifie si tout les quote ouverte sont fermer
 int	my_readline(t_data *data, char **env)
 {
-	init_struct(data, env);
-	data->line = readline("test : ");
+	data->line = readline("Minishell : ");
 	if (!(data->line))
 		return (0);
 	gc_add(&data->garbage_tmp, data->line);
