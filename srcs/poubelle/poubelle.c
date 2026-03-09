@@ -6,47 +6,45 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 17:10:49 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/06 17:13:33 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/09 10:58:05 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
-
 #include "../../includes/minishell.h"
 
-static char *get_type_name(t_token_type type)
+static char	*get_type_name(t_token_type type)
 {
-    if (type == CMD)
-        return ("CMD");
-    if (type == SIMPLE_QUOTE)
-        return ("SIMPLE_QUOTE");
-    if (type == PIPE)
-        return ("PIPE");
-    if (type == REDIR_IN)
-        return ("REDIR_IN");
-    if (type == REDIR_OUT)
-        return ("REDIR_OUT");
-    if (type == HEREDOC)
-        return ("HEREDOC");
-    if (type == APPEND)
-        return ("APPEND");
-    return ("UNKNOWN");
+	if (type == CMD)
+		return ("CMD");
+	if (type == SIMPLE_QUOTE)
+		return ("SIMPLE_QUOTE");
+	if (type == PIPE)
+		return ("PIPE");
+	if (type == REDIR_IN)
+		return ("REDIR_IN");
+	if (type == REDIR_OUT)
+		return ("REDIR_OUT");
+	if (type == HEREDOC)
+		return ("HEREDOC");
+	if (type == APPEND)
+		return ("APPEND");
+	return ("UNKNOWN");
 }
 
-void print_token(t_data *data)
+void	print_token(t_data *data)
 {
-    t_token *tmp;
+	t_token	*tmp;
 
-    tmp = data->token;
-    printf("\n=== LISTE DES TOKENS ===\n");
-    while (tmp)
-    {
-        // Le %-15s permet d'aligner le texte pour que ce soit joli à lire
-        printf("Valeur : [%-15s] | Type : %s\n", tmp->str, get_type_name(tmp->type));
-        tmp = tmp->next;
-    }
-    printf("========================\n\n");
+	tmp = data->token;
+	printf("\n=== LISTE DES TOKENS ===\n");
+	while (tmp)
+	{
+		// Le %-15s permet d'aligner le texte pour que ce soit joli à lire
+		printf("Valeur : [%-15s] | Type : %s\n", tmp->str,
+			get_type_name(tmp->type));
+		tmp = tmp->next;
+	}
+	printf("========================\n\n");
 }
 
 // recupere a partir de linput tout le texte entre les quote
@@ -80,8 +78,6 @@ void print_token(t_data *data)
 // 	word[*j] = '\0';
 // 	return (word);
 // }
-
-
 
 // // verifie si on est entre des quote
 // bool	is_in_quotes(char *line, int pos)

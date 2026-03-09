@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 08:29:06 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/06 17:27:34 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/09 11:11:44 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef enum e_token_type
 typedef struct s_token
 {
 	char				*str;
+	char				*expander;
 	t_token_type		type;
 	struct s_token		*next;
 	struct s_token		*prev;

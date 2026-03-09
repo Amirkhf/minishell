@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 16:24:26 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/06 17:03:29 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/09 11:23:05 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,24 @@
 
 int	parsing(t_data *data, t_token **token)
 {
-	if (check_lexer(data, token))
+	if (check_lexer(data, token) || expander(data, &data->token))
 		return (1);
 	return (0);
+}
+
+int	expander(t_data *data, t_token **token)
+{
+	t_token	*tmp;
+
+	tmp = token;
+	while (tmp->next)
+	{
+		if (is_double_quote(tmp->str))
+		{
+			extract_variable(tmp->str);
+		}
+		tmp = tmp->next;
+	}
 }
 
 // checks for syntax errors
