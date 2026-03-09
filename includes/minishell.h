@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 08:29:06 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/06 14:51:30 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/06 17:27:34 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 
 typedef enum e_token_type
 {
+	ARGV,
 	CMD,
 	SIMPLE_QUOTE,
 	PIPE,
@@ -64,6 +65,7 @@ typedef struct s_data
 	char				*line;
 	char				**env;
 	t_garbage			*garbage_tmp;
+	t_token				*last_token;
 	t_garbage			*garbage_perm;
 	t_token *token; // liste de token
 }						t_data;
@@ -75,7 +77,6 @@ int						check_lexer(t_data *data, t_token **token);
 int						parsing(t_data *data, t_token **token);
 // init struct
 void					init_struct(t_data *data, char **env);
-int						count_quote(char *str);
 
 // for garbage collector
 void					*my_malloc(t_data *data, size_t size, bool type);
@@ -96,22 +97,16 @@ void					my_exit(t_garbage **gc_tmp, t_garbage **gc_perm,
 							int exit_status);
 t_garbage				*ft_lstnew_gc(void *value);
 //
-int						take_cmd(t_data *data, t_token **token_lst, char *str,
-							int *i);
+bool					is_space(char c);
+
 bool					add_token(t_data *data, t_token **token_lst,
 							t_token_type type, char *value);
-bool					is_space(char c);
-bool					is_operator(char c);
-int						what_operator(char *str, int *i);
+bool					is_operator(char *line);
 char					*take_quote(t_data *data, int *i, int *j, char *word);
-int						take_cmd(t_data *data, t_token **token_lst, char *str,
-							int *i);
+int						take_cmd(t_data *data, int *i);
 void					syntax_error(char *str);
 // delete
 void					print_token(t_data *data);
-void					take_big_operator(t_data *data, int operator, int * i);
-void					take_small_operator(t_data *data, int operator, int
-							* i);
 int						ft_lstsize_lexer(t_token *lst);
 void					msg_error_quote(void);
 bool					is_in_quotes(char *line, int pos);

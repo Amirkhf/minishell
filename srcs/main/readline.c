@@ -6,12 +6,13 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 14:14:03 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/06 14:46:10 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/06 16:50:55 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+static int	count_quote(char *str);
 // Lit une ligne de commande
 // verifie si tout les quote ouverte sont fermer
 int	my_readline(t_data *data)
@@ -29,7 +30,7 @@ int	my_readline(t_data *data)
 	return (1);
 }
 
-int	count_quote(char *str)
+static int	count_quote(char *str)
 {
 	int		i;
 	bool	simple_quote;
@@ -42,16 +43,16 @@ int	count_quote(char *str)
 	{
 		if (double_quote || simple_quote)
 		{
-			if (str[i] == DOUBLE_QUOTE_c && simple_quote == false)
+			if (str[i] == DOUBLE_QUOTE_C && simple_quote == false)
 				double_quote = 0;
-			else if (str[i] == SIMPLE_QUOTE_c && double_quote == false)
+			else if (str[i] == SIMPLE_QUOTE_C && double_quote == false)
 				simple_quote = 0;
 		}
 		else
 		{
-			if (str[i] == SIMPLE_QUOTE_c && double_quote == false)
+			if (str[i] == SIMPLE_QUOTE_C && double_quote == false)
 				simple_quote = 1;
-			else if (str[i] == DOUBLE_QUOTE_c && simple_quote == false)
+			else if (str[i] == DOUBLE_QUOTE_C && simple_quote == false)
 				double_quote = 1;
 		}
 		i++;
@@ -60,4 +61,3 @@ int	count_quote(char *str)
 		return (1);
 	return (0);
 }
-

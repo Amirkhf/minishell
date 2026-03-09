@@ -6,11 +6,11 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 08:27:35 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/06 14:31:46 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/06 17:10:09 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 // Lit et tokenize les commandes
 void	loop(t_data *data)

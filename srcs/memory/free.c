@@ -1,25 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_msg.c                                        :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/05 12:36:38 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/05 12:40:17 by amkhelif         ###   ########.fr       */
+/*   Created: 2026/03/06 16:48:09 by amkhelif          #+#    #+#             */
+/*   Updated: 2026/03/06 16:48:35 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	syntax_error(char *str)
+// Libère toute la mémoire d'une liste GC
+void	free_all(t_garbage **gc)
 {
-	write(2, "minishell: syntax error near unexpected token `", 43);
-	write(2, str, ft_strlen(str));
-	write(2, "\'\n", 2);
+	t_garbage	*tmp;
+	t_garbage	*lst;
+
+	if (!gc || !*gc)
+		return ;
+	lst = *gc;
+	while (lst)
+	{
+		tmp = lst->next;
+		if (lst->data)
+			free(lst->data);
+		free(lst);
+		lst = tmp;
+	}
+	*gc = NULL;
 }
 
-void	msg_error_quote(void)
+// Libère la mémoire et quitte le programme
+void	my_exit(t_garbage **gc_tmp, t_garbage **gc_perm, int exit_status)
 {
-	write(2, "minishell: syntax error: unclosed quotes\n", 42);
+	free_all(gc_tmp);
+	free_all(gc_perm);
+	exit(exit_status);
 }
