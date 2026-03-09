@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 16:24:26 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/09 17:03:17 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/09 17:12:43 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,11 @@ int expander(t_data *data, t_token **token)
 // fonction principal qui va cree la valeur a partie de ca $
 char *extract_variable(t_data *data, char *str)
 {
+	bool no_exist;
+	char *new_value;
+
+	new_value = NULL;
+	no_exist = 0;
 	char *name;
 	long long len_expanded;
 	name = extract_var_name(data, str);
@@ -53,7 +58,11 @@ char *extract_variable(t_data *data, char *str)
 		my_exit(data->garbage_tmp, data->garbage_perm, EXIT_FAILURE);
 	len_expanded = expanded_len(data, str, name);
 	if (len_expanded < 0)
-		return ("");
+		no_exist = 1;
+	new_value = fill_expanded_str(data, str, len_expanded, name);
+	if (!(new_value))
+		return (NULL);
+	return (new_value);
 }
 
 // checks for syntax errors

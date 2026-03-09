@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 08:29:06 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/09 16:43:59 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/09 17:41:53 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void syntax_error(char *str);
 void my_exit(t_garbage **gc_tmp, t_garbage **gc_perm,
 			 int exit_status);
 t_garbage *ft_lstnew_gc(void *value);
-//
+char *ft_strjoin(char const *s1, char const *s2);
 bool is_space(char c);
 char *ft_substr(char const *s, unsigned int start, size_t len);
 

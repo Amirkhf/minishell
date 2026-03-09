@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 16:23:15 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/09 16:42:04 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/09 18:09:08 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,83 @@ int is_variable_env(char *str)
 	}
 	return (EXIT_FAILURE);
 }
+
+char *extract_before_variable(t_data *data, char *str, int len, int *i)
+{
+	char *new_str;
+	int j;
+
+	j = 0;
+	new_str = my_malloc(data, len + ft_strlen(str) + 2, TMP);
+	if (!(new_str))
+		my_exit(&data->garbage_tmp, &data->garbage_perm, EXIT_FAILURE);
+	while (str && !(str[*i] == '$'))
+	{
+		new_str[j] = str[*i];
+		(*i)++;
+		j++;
+	}
+	new_str[j] = '\0';
+	return (new_str);
+}
+
+char *fill_expanded_str(t_data *data, char *str, int len, char *name_variale)
+{
+	char *new_str;
+	char *env_value;
+	int i;
+	int j;
+
+	j = 0;
+	i = 0;
+	env_value = NULL;
+	new_str = extract_before_variable(data, str, len, &i);
+	if (!(new_str))
+		return (NULL);
+
+	if (str[i] == '$')
+		env_value = extract_env_value(data, name_variale, len);
+	if (env_value)
+	{
+		new_str = ft_strjoin(new_str, env_value);
+		if (!(new_str))
+			return (NULL);
+	}
+	// recupere ce quil y a droite
+	return (new_str);
+}
+// fonction qui copie la valeur de la vraible denvironnement dans une string
+char *extract_env_value(t_data *data, char *name_variable, int len)
+{
+
+	char *env_value;
+	int i;
+	int j;
+	int a;
+
+	a = 0;
+	i = 0;
+	env_value = my_malloc(data, len + 2, TMP);
+	if (!(env_value))
+		return (NULL);
+	while (data->env[i])
+	{
+		if (ft_strncmp(data->env[i], name_variable, ft_strlen(name_variable) + 1))
+		{
+			j = ft_strlen(name_variable) + 1;
+			while (data->env[i][j])
+			{
+				env_value[a] = data->env[i][j];
+				j++;
+				a++;
+			}
+			env_value[a] = '\0';
+		}
+		i++;
+	}
+	return (env_value);
+}
+
 // enlever les quote de la str
 char *extract_quote(t_data *data, char *str)
 {
