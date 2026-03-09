@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 08:27:35 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/06 17:10:09 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/09 11:52:44 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	loop(t_data *data)
 			free_all(&data->garbage_tmp);
 			continue ;
 		}
+		print_token(data);
 		free_all(&data->garbage_tmp);
 	}
 }

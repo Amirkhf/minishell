@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 08:29:06 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/09 11:11:44 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/09 11:32:58 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,9 @@ int						check_lexer(t_data *data, t_token **token);
 int						parsing(t_data *data, t_token **token);
 // init struct
 void					init_struct(t_data *data, char **env);
+int						expander(t_data *data, t_token **token);
+int						is_double_quote(char *str);
+char					*extract_variable(t_data *data, char *str);
 
 // for garbage collector
 void					*my_malloc(t_data *data, size_t size, bool type);
