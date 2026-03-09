@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_struct.c                                      :+:      :+:    :+:   */
+/*   extract_path.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/26 15:31:50 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/09 12:27:37 by amkhelif         ###   ########.fr       */
+/*   Created: 2026/03/09 12:28:39 by amkhelif          #+#    #+#             */
+/*   Updated: 2026/03/09 12:32:35 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
-// Initialise la structure de données
-void	init_struct(t_data *data, char **env)
+
+char **extract_path(t_data *data, char **env)
 {
-	data->env = extract_path();
-	data->garbage_perm = NULL;
-	data->garbage_tmp = NULL;
-	data->line = NULL;
-	data->token = NULL;
+		
 }

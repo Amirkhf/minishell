@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 16:23:15 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/09 11:49:37 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/09 12:26:44 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,6 @@ char	*extract_variable(t_data *data, char *str)
 		i++;
 	}
 	new_str[j] = '\0';
-	printf("%s\n", new_str);
+	// printf("%s\n", new_str);
 	return (new_str);
 }

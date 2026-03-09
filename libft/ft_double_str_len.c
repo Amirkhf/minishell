@@ -1,23 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_struct.c                                      :+:      :+:    :+:   */
+/*   ft_double_str_len.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/26 15:31:50 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/09 12:27:37 by amkhelif         ###   ########.fr       */
+/*   Created: 2026/03/09 12:32:41 by amkhelif          #+#    #+#             */
+/*   Updated: 2026/03/09 12:34:43 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../includes/minishell.h"
 
-// Initialise la structure de données
-void	init_struct(t_data *data, char **env)
+long long	ft_double_str_len(char **str)
 {
-	data->env = extract_path();
-	data->garbage_perm = NULL;
-	data->garbage_tmp = NULL;
-	data->line = NULL;
-	data->token = NULL;
+	int i;
+	int j;
+	int len;
+
+	len = 0;
+	j = 0;
+	i = 0;
+	while (str[i])
+	{
+		j = 0;
+		while (str[i][j])
+		{
+			j++;
+			len++;
+		}
+		i++;
+	}
+	return (len + 1);
 }

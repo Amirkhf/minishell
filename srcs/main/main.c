@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 08:27:35 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/09 11:52:44 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/09 12:31:24 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	loop(t_data *data)
 			free_all(&data->garbage_tmp);
 			continue ;
 		}
-		print_token(data);
 		if (parsing(data, &token))
 		{
 			free_all(&data->garbage_tmp);
@@ -45,7 +44,6 @@ int	main(int argc, char **argv, char **env)
 	int		i;
 
 	i = 0;
-	init_struct(&data, env);
 	loop(&data);
 	return (EXIT_SUCCESS);
 }

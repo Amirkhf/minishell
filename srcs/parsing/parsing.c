@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 16:24:26 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/09 11:45:47 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/09 12:21:14 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	expander(t_data *data, t_token **token)
 			tmp->str = extract_variable(data, tmp->str);
 			if (!(tmp->str))
 				return (EXIT_FAILURE);
-			// printf("%s", tmp->str);
 		}
 		tmp = tmp->next;
 	}
