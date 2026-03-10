@@ -6,13 +6,11 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 12:47:08 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/10 12:47:56 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/10 14:42:27 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
-
-
 
 // fonction qui copie la valeur de la vraible denvironnement dans une string
 char	*extract_env_value(t_data *data, char *name_variable, int len)
@@ -45,7 +43,6 @@ char	*extract_env_value(t_data *data, char *name_variable, int len)
 	}
 	return (env_value);
 }
-
 
 // enlever les quote de la str
 char	*extract_quote(t_data *data, char *str)
@@ -80,15 +77,18 @@ char	*extract_var_name(t_data *data, char *str)
 	int		j;
 	char	*name_variable;
 
+	printf("je suis dans extract_var_name\n");
 	j = 0;
 	i = 0;
-	name_variable = my_malloc(data, ft_strlen(str) + 1, TMP);
+	name_variable = my_malloc(data, ft_strlen(str) + 3, PERM);
 	if (!(name_variable))
 		return (NULL);
-	while (str && !(str[i] == '$'))
+	while (str && !(str[i] == '$')&& str[i])
 		i++;
-	while (str && !(str[i] == ' '))
+	i++; // skip le '$'
+	while (str && !(str[i] == ' ') && !(str[i] == '$') && str[i])
 	{
+		printf("j = %d, \n i = %d\n", j, i);
 		name_variable[j] = str[i];
 		i++;
 		j++;
