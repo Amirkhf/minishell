@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 12:47:08 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/10 14:42:27 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/10 17:21:31 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,12 @@ char	*extract_env_value(t_data *data, char *name_variable, int len)
 			while (data->env[i][j])
 			{
 				env_value[a] = data->env[i][j];
+				printf("\n%d : %c\n", a, env_value[a]);
 				j++;
 				a++;
 			}
 			env_value[a] = '\0';
+			break ;
 		}
 		i++;
 	}
@@ -77,18 +79,16 @@ char	*extract_var_name(t_data *data, char *str)
 	int		j;
 	char	*name_variable;
 
-	printf("je suis dans extract_var_name\n");
 	j = 0;
 	i = 0;
 	name_variable = my_malloc(data, ft_strlen(str) + 3, PERM);
 	if (!(name_variable))
 		return (NULL);
-	while (str && !(str[i] == '$')&& str[i])
+	while (str && !(str[i] == '$') && str[i])
 		i++;
 	i++; // skip le '$'
-	while (str && !(str[i] == ' ') && !(str[i] == '$') && str[i])
+	while (str && ft_isalpha(str[i]) && str[i])
 	{
-		printf("j = %d, \n i = %d\n", j, i);
 		name_variable[j] = str[i];
 		i++;
 		j++;

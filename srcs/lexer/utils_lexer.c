@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 13:45:08 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/09 15:04:36 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/10 16:12:15 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	take_cmd(t_data *data, int *i)
 	int		j;
 
 	j = 0;
-	word = my_malloc(data, ft_strlen(data->line) + 1, TMP);
+	word = my_malloc(data, ft_strlen(data->line) + 2, TMP);
 	if (!(word))
 		my_exit(&data->garbage_tmp, &data->garbage_perm, 1);
 	while (data->line[*i] && !is_operator(data->line + *i))
@@ -30,9 +30,12 @@ int	take_cmd(t_data *data, int *i)
 		if (is_space(data->line[*i]))
 			break ;
 		word[j] = data->line[*i];
+		if (!data->line[*i])
+			break ;
 		j++;
 		(*i)++;
 	}
+	j++;
 	word[j] = '\0';
 	if (data->last_token && data->last_token->type != CMD
 		&& data->last_token->type != PIPE)

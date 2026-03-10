@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 08:29:06 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/10 14:10:06 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/10 15:29:01 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,29 +71,25 @@ typedef struct s_data
 	t_token *token; // liste de token
 }						t_data;
 
+int						ft_isalpha(int c);
 long long				expanded_len(t_data *data, char *str,
 							char *name_variable);
 char					*extract_env_value(t_data *data, char *name_variable,
 							int len);
 char					*extract_var_name(t_data *data, char *str);
 char					*extract_quote(t_data *data, char *str);
-// libft
 char					*extract_var_name(t_data *data, char *str);
 char					**extract_env(t_data *data, char **env);
 char					**ft_split(t_data *data, char const *s, char c);
 int						ft_strncmp(const char *s1, const char *s2, size_t n);
 char					*ft_strdup(t_data *data, const char *s);
-int						check_lexer( t_token **token);
+int						check_lexer(t_token **token);
 int						parsing(t_data *data, t_token **token);
 void					print_double_tab(char **str);
-// init struct
 int						init_struct(t_data *data, char **env);
 int						expander(t_data *data, t_token **token);
 int						is_double_quote(char *str);
 long long				ft_double_str_len(char **str);
-void					copy_env(char *new_env, char **env);
-
-// for garbage collector
 void					*my_malloc(t_data *data, size_t size, bool type);
 void					gc_add(t_garbage **lst, void *data);
 void					free_all(t_garbage **gc);
@@ -102,29 +98,24 @@ t_token					*new_token(t_data *data, char *str, t_token_type type);
 void					token_add_back(t_data *data, t_token **head,
 							t_token *new);
 int						is_variable_env(char *str);
-// for token_line
 t_token					*token_line(t_data *data);
 int						my_readline(t_data *data, char **env);
 void					syntax_error(char *str);
-
-// for free
 void					my_exit(t_garbage **gc_tmp, t_garbage **gc_perm,
 							int exit_status);
 t_garbage				*ft_lstnew_gc(void *value);
-char					*ft_strjoin(char const *s1, char const *s2);
+char					*ft_strjoin(t_data *data, char const *s1,
+							char const *s2);
 bool					is_space(char c);
 char					*ft_substr(char const *s, unsigned int start,
 							size_t len);
-
 bool					add_token(t_data *data, t_token **token_lst,
 							t_token_type type, char *value);
 bool					is_operator(char *line);
 char					*take_quote(t_data *data, int *i, int *j, char *word);
 int						take_cmd(t_data *data, int *i);
 void					syntax_error(char *str);
-// delete
 void					print_token(t_data *data);
 int						ft_lstsize_lexer(t_token *lst);
 void					msg_error_quote(void);
-bool					is_in_quotes(char *line, int pos);
 #endif

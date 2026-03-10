@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_struct.c                                      :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/26 15:31:50 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/10 17:12:27 by amkhelif         ###   ########.fr       */
+/*   Created: 2025/11/10 10:48:58 by amkhelif          #+#    #+#             */
+/*   Updated: 2026/03/10 14:49:33 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../includes/minishell.h"
 
-// Initialise la structure de données
-int	init_struct(t_data *data, char **env)
+// verifi si c'est un chiffre ou une lettre ou un dollard
+int	ft_isalpha(int c)
 {
-	data->garbage_perm = NULL;
-	data->garbage_tmp = NULL;
-	data->line = NULL;
-	data->token = NULL;
-	data->last_token = NULL;
-	data->env = extract_env(data, env);
-	if (!(data->env))
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0'
+			&& c <= '9'))
+		return (1);
+	return (0);
 }
+
+/*int main (void)
+{
+	char c = 126;
+	printf("%d",ft_isalpha(c));
+}*/

@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 12:43:15 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/10 12:58:10 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/10 14:53:28 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,13 @@ static char	*fill_expanded_str(t_data *data, char *str, int len,
 		env_value = extract_env_value(data, name_variale, len);
 	if (env_value)
 	{
-		new_str = ft_strjoin(new_str, env_value);
+		new_str = ft_strjoin(data, new_str, env_value);
 		if (!(new_str))
 			return (NULL);
 	}
 	env_value = NULL;
-	if (!(str[i + ft_strlen(name_variale) + 1] == '\0') && str[i
-		+ ft_strlen(name_variale) + 1] == '$')
+	if (!(str[i + ft_strlen(name_variale) + 1] == '\0') && !(str[i
+		+ ft_strlen(name_variale) + 1] == '$'))
 	{
 		env_value = extract_after_varaiable(data, str, &i);
 		if (!(env_value))
