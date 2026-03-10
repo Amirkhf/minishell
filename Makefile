@@ -6,7 +6,7 @@
 #    By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/26 09:36:23 by amkhelif          #+#    #+#              #
-#    Updated: 2026/03/09 16:30:06 by amkhelif         ###   ########.fr        #
+#    Updated: 2026/03/10 12:55:30 by amkhelif         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,8 @@ SRC = 	libft/ft_double_str_len.c \
 		libft/ft_strdup.c \
 		libft/ft_strlen.c \
 		libft/ft_strncmp.c \
+		libft/ft_expanded_len.c \
+		libft/ft_strjoin.c \
 		srcs/error/error_msg.c \
 		srcs/init/init_struct.c \
 		srcs/init/extract_path.c \
@@ -35,6 +37,8 @@ SRC = 	libft/ft_double_str_len.c \
 		srcs/memory/garbage.c \
 		srcs/parsing/parsing.c \
 		srcs/parsing/utils.c \
+		srcs/parsing/expander/expander.c \
+		srcs/parsing/expander/expander_utils.c \
 		srcs/poubelle/poubelle.c
 
 OBJ = $(SRC:.c=.o)

@@ -6,47 +6,48 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 12:28:39 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/09 16:22:05 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/10 14:21:13 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+static void	fill_my_env(t_data *data, char **env);
 // extract the path from the env variable
-char **extract_env(t_data *data, char **env)
+char	**extract_env(t_data *data, char **env)
 {
-	int len;
+	int	len;
 
 	len = ft_double_str_len(env);
 	data->env = my_malloc(data, (len + 1) * sizeof(char *), PERM);
 	if (!(data->env))
 		return (NULL);
-	// revenir apres ici 
+	fill_my_env(data, env);
+	if (!(data->env) || data->env[0][0] == '\0')
+		return (NULL);
+	return (data->env);
 }
 
-// void copy_env(char *new_env, char **env)
-// {
-// 	int i;
-// 	int j;
-// 	int a;
+// recupere la variable env est la copie
+static void	fill_my_env(t_data *data, char **env)
+{
+	int	i;
+	int	j;
 
-// 	a = 0;
-// 	j = 0;
-// 	i = 0;
-// 	printf("je suis dans la fonction copy_env\n");
-// 	while (env[i])
-// 	{
-// 		j = 0;
-// 		while (env[i][j])
-// 		{
-// 			new_env[a] = env[i][j];
-// 			j++;
-// 			a++;
-// 		}
-// 		new_env[a] = '\n';
-// 		i++;
-// 	}
-// 	new_env[a] = '\0';
-// 	// printf("%s\n", new_env);
-// 	// return (new_env);e
-// }
+	i = 0;
+	while (env[i])
+	{
+		j = 0;
+		data->env[i] = my_malloc(data, ft_strlen(env[i]) + 1, PERM);
+		if (!(data->env[i]))
+			my_exit(&data->garbage_tmp, &data->garbage_perm, EXIT_FAILURE);
+		while (env[i][j])
+		{
+			data->env[i][j] = env[i][j];
+			j++;
+		}
+		data->env[i][j] = '\0';
+		i++;
+	}
+	data->env[i] = NULL;
+}

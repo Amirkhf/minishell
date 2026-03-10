@@ -6,40 +6,40 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 08:27:35 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/09 15:03:45 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/10 12:58:54 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void loop(t_data *data, char **env)
+void	loop(t_data *data, char **env)
 {
-	t_token *token;
+	t_token	*token;
 
 	while (1)
 	{
 		if (!(my_readline(data, env)))
-			continue;
+			continue ;
 		token = token_line(data);
 		if (token == NULL)
 		{
 			free_all(&data->garbage_tmp);
-			continue;
+			continue ;
 		}
 		if (parsing(data, &token))
 		{
 			free_all(&data->garbage_tmp);
-			continue;
+			continue ;
 		}
 		print_token(data);
 		free_all(&data->garbage_tmp);
 	}
 }
 
-int main(int argc, char **argv, char **env)
+int	main(int argc, char **argv, char **env)
 {
-	t_data data;
-	int i;
+	t_data	data;
+	int		i;
 
 	i = 0;
 	if (init_struct(&data, env))
