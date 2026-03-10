@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 16:23:15 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/09 18:09:08 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/10 11:48:48 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ char *fill_expanded_str(t_data *data, char *str, int len, char *name_variale)
 	// recupere ce quil y a droite
 	return (new_str);
 }
+
 // fonction qui copie la valeur de la vraible denvironnement dans une string
 char *extract_env_value(t_data *data, char *name_variable, int len)
 {
@@ -170,3 +171,6 @@ char *extract_var_name(t_data *data, char *str)
 	name_variable[j] = '\0';
 	return (name_variable);
 }
+
+
+
