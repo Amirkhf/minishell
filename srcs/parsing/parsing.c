@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 16:24:26 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/09 17:12:43 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/10 12:43:33 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,28 +20,7 @@ int parsing(t_data *data, t_token **token)
 	return (0);
 }
 
-// plus tard
-int expander(t_data *data, t_token **token)
-{
-	t_token *tmp;
 
-	printf("je suis dans la fonction expander\n");
-	tmp = *token;
-	while (tmp)
-	{
-		if (is_double_quote(tmp->str) && !(is_variable_env(tmp->str)))
-		{
-			tmp->str = extract_quote(data, tmp->str);
-			if (!(tmp->str))
-				return (EXIT_FAILURE);
-			tmp->str = extract_variable(data, tmp->str);
-			if (!(tmp->str))
-				return (EXIT_FAILURE);
-		}
-		tmp = tmp->next;
-	}
-	return (EXIT_SUCCESS);
-}
 
 // fonction principal qui va cree la valeur a partie de ca $
 char *extract_variable(t_data *data, char *str)
