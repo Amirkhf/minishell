@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 12:43:15 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/10 14:53:28 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/10 17:58:05 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,14 @@ int	expander(t_data *data, t_token **token)
 	tmp = *token;
 	while (tmp)
 	{
-		if (is_double_quote(tmp->str) && !(is_variable_env(tmp->str)))
+		if (!(is_simple_quote(tmp->str)) && !(is_variable_env(tmp->str)))
 		{
-			tmp->str = extract_quote(data, tmp->str);
-			if (!(tmp->str))
-				return (EXIT_FAILURE);
+			if (is_double_quote(tmp->str))
+			{
+				tmp->str = extract_quote(data, tmp->str);
+				if (!(tmp->str))
+					return (EXIT_FAILURE);
+			}
 			tmp->str = extract_variable(data, tmp->str);
 			if (!(tmp->str))
 				return (EXIT_FAILURE);
@@ -44,19 +47,19 @@ int	expander(t_data *data, t_token **token)
 // fonction principal qui va cree la valeur a partie de ca $
 static char	*extract_variable(t_data *data, char *str)
 {
-	bool		no_exist;
 	char		*new_value;
 	char		*name;
 	long long	len_expanded;
 
+	// bool		no_exist;
 	new_value = NULL;
-	no_exist = 0;
+	// no_exist = 0;
 	name = extract_var_name(data, str);
 	if (!(name))
 		my_exit(&data->garbage_tmp, &data->garbage_perm, EXIT_FAILURE);
 	len_expanded = expanded_len(data, str, name);
-	if (len_expanded < 0)
-		no_exist = 1;
+	// if (len_expanded == 0)
+	// 	no_exist = 1;
 	new_value = fill_expanded_str(data, str, len_expanded, name);
 	if (!(new_value))
 		return (NULL);
@@ -79,6 +82,7 @@ static char	*fill_expanded_str(t_data *data, char *str, int len,
 		return (NULL);
 	if (str[i] == '$')
 		env_value = extract_env_value(data, name_variale, len);
+	printf("%s\n", env_value);
 	if (env_value)
 	{
 		new_str = ft_strjoin(data, new_str, env_value);
@@ -87,7 +91,7 @@ static char	*fill_expanded_str(t_data *data, char *str, int len,
 	}
 	env_value = NULL;
 	if (!(str[i + ft_strlen(name_variale) + 1] == '\0') && !(str[i
-		+ ft_strlen(name_variale) + 1] == '$'))
+			+ ft_strlen(name_variale) + 1] == '$'))
 	{
 		env_value = extract_after_varaiable(data, str, &i);
 		if (!(env_value))

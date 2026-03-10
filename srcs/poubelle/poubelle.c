@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 17:10:49 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/09 14:29:45 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/10 17:33:31 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	print_token(t_data *data)
 	while (tmp)
 	{
 		// Le %-15s permet d'aligner le texte pour que ce soit joli à lire
-		printf("Valeur : [%-15s] | Type : %s\n", tmp->str,
+		printf("Valeur : [%s] | Type : %s\n", tmp->str,
 			get_type_name(tmp->type));
 		tmp = tmp->next;
 	}

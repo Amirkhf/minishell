@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 12:47:08 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/10 17:21:31 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/10 17:46:46 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,27 +22,26 @@ char	*extract_env_value(t_data *data, char *name_variable, int len)
 
 	a = 0;
 	i = 0;
-	env_value = my_malloc(data, len + 2, TMP);
+	env_value = my_malloc(data, len + 1, TMP);
 	if (!(env_value))
 		return (NULL);
-	while (data->env[i])
+	while (len != 0 && data->env[i])
 	{
-		if (ft_strncmp(data->env[i], name_variable, ft_strlen(name_variable)
-				+ 1))
+		if (!ft_strncmp(data->env[i], name_variable, ft_strlen(name_variable)))
 		{
 			j = ft_strlen(name_variable) + 1;
 			while (data->env[i][j])
 			{
+				printf("%c\n", data->env[i][j]);
 				env_value[a] = data->env[i][j];
-				printf("\n%d : %c\n", a, env_value[a]);
 				j++;
 				a++;
 			}
-			env_value[a] = '\0';
 			break ;
 		}
 		i++;
 	}
+	env_value[a] = '\0';
 	return (env_value);
 }
 

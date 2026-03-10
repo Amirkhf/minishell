@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 08:29:06 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/10 15:29:01 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/10 17:52:04 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct s_data
 	t_token *token; // liste de token
 }						t_data;
 
+int						is_simple_quote(char *str);
 int						ft_isalpha(int c);
 long long				expanded_len(t_data *data, char *str,
 							char *name_variable);
