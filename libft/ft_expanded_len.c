@@ -6,32 +6,85 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 16:33:58 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/10 17:37:43 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/11 12:50:33 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-// calcule la taille du contenue dune variable denvironnement
-long long	expanded_len(t_data *data, char *str, char *name_variable)
-{
-	int i;
-	int j;
+static long long	len_var_name(t_data *data, char *name_var_env);
 
+long long	expanded_len(t_data *data)
+{
+	int		i;
+	int		len;
+	char	*name_var_env;
+
+	len = 0;
+	i = 0;
+	name_var_env = my_malloc(data, ft_strlen(data->line), TMP);
+	if (!(name_var_env))
+		my_exit(data->garbage_tmp, data->garbage_perm, EXIT_FAILURE);
+	while (data->line[i])
+	{
+		if (data->line[i] == '$')
+		{
+			extract_var_name(data, data->line, name_var_env, &i);
+			len += len_var_env(name_var_env);
+		}
+		len++;
+		i++;
+	}
+	return (len);
+}
+
+// this function calcul the len variable
+static long long	len_var_name(t_data *data, char *name_var_env)
+{
+	int	i;
+	int	j;
+	int	len;
+
+	len = 0;
 	j = 0;
 	i = 0;
 	while (data->env[i])
 	{
-		if (ft_strncmp(data->env[i], name_variable,
-				ft_strlen(name_variable)) == 0)
+		if (ft_strncmp(data->env[i], name_var_env,
+				ft_strlen(name_var_env)) == 0)
 		{
-			while ((data->env[i] + ft_strlen(name_variable) + 1)[j])
+			j = ft_strlen(name_var_env) + 1;
+			while (data->env[i][j])
+			{
+				len++;
 				j++;
-			break ;
+			}
 		}
 		i++;
 	}
-	if (j == 0)
-		return (0);
-	return (j);
+	return (len);
+}
+// // calcule la taille du contenue dune variable denvironnement
+// long long	expanded_len(t_data *data, char *str, char *name_variable)
+// {
+// 	int i;
+// 	int j;
+
+// 	j = 0;
+// 	i = 0;
+// 	while (data->env[i])
+// 	{
+// 		if (ft_strncmp(data->env[i], name_variable,
+// 				ft_strlen(name_variable)) == 0)
+// 		{
+// 			while ((data->env[i] + ft_strlen(name_variable) + 1)[j])
+// 				j++;
+// 			break ;
+// 		}
+// 		i++;
+// 	}
+// 	if (j == 0)
+// 		return (0);
+// 	return (j);
+// }
 }
