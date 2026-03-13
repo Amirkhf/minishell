@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 16:24:26 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/10 14:09:55 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/12 14:48:32 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	parsing(t_data *data, t_token **token)
 {
 	printf("je suis dans le parsing\n");
-	if (check_lexer(token) || expander(data, &data->token))
+	if (check_lexer(token) || expander(data))
 		return (EXIT_FAILURE);
 	return (0);
 }

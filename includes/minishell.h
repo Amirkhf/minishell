@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 08:29:06 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/11 13:55:59 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/13 14:21:34 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,57 +72,56 @@ typedef struct s_data
 	t_token *token; // liste de token
 }						t_data;
 
-long long				expanded_len(t_data *data);
-int						is_simple_quote(char *str);
-int						ft_isalpha(int c);
+void					copy_name_variable(t_data *data, int *i, int *j,
 							char *name_variable);
-							char *extract_env_value(t_data *data,
-								char *name_variable, int len);
-							char *extract_quote(t_data *data, char *str);
-							char *extract_var_name(t_data *data, char *str,
-								char *name_variable, int *i);
-							char **extract_env(t_data *data, char **env);
-							char **ft_split(t_data *data, char const *s,
-								char c);
-							int ft_strncmp(const char *s1, const char *s2,
-								size_t n);
-							char *ft_strdup(t_data *data, const char *s);
-							int check_lexer(t_token **token);
-							int parsing(t_data *data, t_token **token);
-							void print_double_tab(char **str);
-							int init_struct(t_data *data, char **env);
-							int expander(t_data *data, t_token **token);
-							int is_double_quote(char *str);
-							long long ft_double_str_len(char **str);
-							void *my_malloc(t_data *data, size_t size,
-								bool type);
-							void gc_add(t_garbage **lst, void *data);
-							void free_all(t_garbage **gc);
-							size_t ft_strlen(const char *s);
-							t_token *new_token(t_data *data, char *str,
-								t_token_type type);
-							void token_add_back(t_data *data, t_token **head,
-								t_token *new);
-							int is_variable_env(char *str);
-							t_token *token_line(t_data *data);
-							int my_readline(t_data *data, char **env);
-							void syntax_error(char *str);
-							void my_exit(t_garbage **gc_tmp,
-								t_garbage **gc_perm, int exit_status);
-							t_garbage *ft_lstnew_gc(void *value);
-							char *ft_strjoin(t_data *data, char const *s1,
-								char const *s2);
-							bool is_space(char c);
-							char *ft_substr(char const *s, unsigned int start,
-								size_t len);
-							bool add_token(t_data *data, t_token **token_lst,
-								t_token_type type, char *value);
-							bool is_operator(char *line);
-							char *take_quote(t_data *data, int *i, int *j,
-								char *word);
-							int take_cmd(t_data *data, int *i);
-							void syntax_error(char *str);
-							void print_token(t_data *data);
-							int ft_lstsize_lexer(t_token *lst);
-							void msg_error_quote(void);
+void					copy_env_value(t_data *data, int *i, int *j,
+							char *name_variable);
+int						is_simple_quote(char *str, int index_dollar);
+void					extract_var_env(t_data *data, int *j, int *i,
+							char *name_variable);
+char					*extract_var_name(t_data *data, int *i);
+long long				expanded_len(t_data *data);
+int						ft_isalpha(int c);
+char					*extract_env_value(t_data *data, char *name_variable,
+							int len);
+char					*extract_quote(t_data *data, char *str);
+char					**extract_env(t_data *data, char **env);
+char					**ft_split(t_data *data, char const *s, char c);
+int						ft_strncmp(const char *s1, const char *s2, size_t n);
+char					*ft_strdup(t_data *data, const char *s);
+int						check_lexer(t_token **token);
+int						parsing(t_data *data, t_token **token);
+void					print_double_tab(char **str);
+int						init_struct(t_data *data, char **env);
+char					*expander(t_data *data);
+int						is_double_quote(char *str);
+long long				ft_double_str_len(char **str);
+void					*my_malloc(t_data *data, size_t size, bool type);
+void					gc_add(t_garbage **lst, void *data);
+void					free_all(t_garbage **gc);
+size_t					ft_strlen(const char *s);
+t_token					*new_token(t_data *data, char *str, t_token_type type);
+void					token_add_back(t_data *data, t_token **head,
+							t_token *new);
+int						is_variable_env(char *str);
+t_token					*token_line(t_data *data);
+int						my_readline(t_data *data, char **env);
+void					syntax_error(char *str);
+void					my_exit(t_garbage **gc_tmp, t_garbage **gc_perm,
+							int exit_status);
+t_garbage				*ft_lstnew_gc(void *value);
+char					*ft_strjoin(t_data *data, char const *s1,
+							char const *s2);
+bool					is_space(char c);
+char					*ft_substr(char const *s, unsigned int start,
+							size_t len);
+bool					add_token(t_data *data, t_token **token_lst,
+							t_token_type type, char *value);
+bool					is_operator(char *line);
+char					*take_quote(t_data *data, int *i, int *j, char *word);
+int						take_cmd(t_data *data, int *i);
+void					syntax_error(char *str);
+void					print_token(t_data *data);
+int						ft_lstsize_lexer(t_token *lst);
+void					msg_error_quote(void);
 #endif
