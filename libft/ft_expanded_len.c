@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 16:33:58 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/12 17:56:58 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/13 15:05:07 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ long long	expanded_len(t_data *data)
 
 	name_variable = my_malloc(data, ft_strlen(data->line) + 1, TMP);
 	if (!(name_variable))
-		my_exit(data->garbage_tmp, data->garbage_perm, EXIT_FAILURE);
+		my_exit(&data->garbage_tmp, &data->garbage_perm, EXIT_FAILURE);
 	len = 0;
 	i = 0;
 	while (data->line && data->line[i])

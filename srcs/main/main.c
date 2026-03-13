@@ -6,19 +6,19 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 08:27:35 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/13 14:00:51 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/13 15:00:35 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	loop(t_data *data, char **env)
+void	loop(t_data *data)
 {
 	t_token	*token;
 
 	while (1)
 	{
-		if (!(my_readline(data, env)))
+		if (!(my_readline(data)))
 			continue ;
 		data->new_line = expander(data);
 		printf("voici  le resultat %s\n", data->new_line);
@@ -43,9 +43,11 @@ int	main(int argc, char **argv, char **env)
 	t_data	data;
 	int		i;
 
+	argc = 0;
+	argv = NULL;
 	i = 0;
 	if (init_struct(&data, env))
 		return (EXIT_FAILURE);
-	loop(&data, env);
+	loop(&data);
 	return (EXIT_SUCCESS);
 }

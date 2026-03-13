@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 08:29:06 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/13 14:21:34 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/13 15:24:32 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ long long				expanded_len(t_data *data);
 int						ft_isalpha(int c);
 char					*extract_env_value(t_data *data, char *name_variable,
 							int len);
+void					loop(t_data *data);
 char					*extract_quote(t_data *data, char *str);
 char					**extract_env(t_data *data, char **env);
 char					**ft_split(t_data *data, char const *s, char c);
@@ -105,7 +106,7 @@ void					token_add_back(t_data *data, t_token **head,
 							t_token *new);
 int						is_variable_env(char *str);
 t_token					*token_line(t_data *data);
-int						my_readline(t_data *data, char **env);
+int						my_readline(t_data *data);
 void					syntax_error(char *str);
 void					my_exit(t_garbage **gc_tmp, t_garbage **gc_perm,
 							int exit_status);

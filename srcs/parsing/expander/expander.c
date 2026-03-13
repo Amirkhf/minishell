@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 12:43:15 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/13 14:35:07 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/13 15:21:15 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,12 @@ char	*expander(t_data *data)
 		{
 			a = i;
 			copy_env_value(data, &i, &j, extract_var_name(data, &a));
+			continue;
 		}
 		if (data->line[i] != '\'')
 			data->new_line[j++] = data->line[i++];
 		else
-		{
 			i++;
-			j++;
-		}
 	}
 	return (data->new_line[j] = '\0', data->new_line);
 }
