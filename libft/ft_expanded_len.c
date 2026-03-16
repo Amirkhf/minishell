@@ -6,12 +6,11 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 16:33:58 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/13 15:05:07 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/16 13:01:29 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
 
 int	len_var_env(t_data *data, char *name_variable)
 {
@@ -41,7 +40,7 @@ int	len_var_env(t_data *data, char *name_variable)
 	return (len);
 }
 
-long long	expanded_len(t_data *data)
+long long	expanded_len(t_data *data, char *str)
 {
 	int		i;
 	int		len;
@@ -52,13 +51,14 @@ long long	expanded_len(t_data *data)
 		my_exit(&data->garbage_tmp, &data->garbage_perm, EXIT_FAILURE);
 	len = 0;
 	i = 0;
-	while (data->line && data->line[i])
+	while (str && str[i])
 	{
-		if (data->line[i] == '$')
+		if (str[i] == '$')
 		{
-			name_variable = extract_var_name(data, &i); // extrait la variable
+			name_variable = extract_var_name(data, str, &i);
 			if (name_variable)
 				len += len_var_env(data, name_variable);
+			continue;
 		}
 		len++;
 		i++;

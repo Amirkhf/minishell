@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 08:27:35 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/13 15:00:35 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/16 13:08:41 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ void	loop(t_data *data)
 	{
 		if (!(my_readline(data)))
 			continue ;
-		data->new_line = expander(data);
-		printf("voici  le resultat %s\n", data->new_line);
 		token = token_line(data);
 		if (token == NULL)
 		{

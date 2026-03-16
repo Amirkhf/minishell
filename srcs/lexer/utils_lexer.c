@@ -6,11 +6,13 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 13:45:08 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/10 16:12:15 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/16 14:15:00 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+static char	*take_quote(t_data *data, int *i, int *j, char *word);
 
 // Extrait un mot de la ligne
 int	take_cmd(t_data *data, int *i)
@@ -35,7 +37,6 @@ int	take_cmd(t_data *data, int *i)
 		j++;
 		(*i)++;
 	}
-	j++;
 	word[j] = '\0';
 	if (data->last_token && data->last_token->type != CMD
 		&& data->last_token->type != PIPE)
@@ -61,7 +62,7 @@ bool	is_operator(char *line)
 }
 
 // recupere a partir de linput tout le texte entre les quote
-char	*take_quote(t_data *data, int *i, int *j, char *word)
+static char	*take_quote(t_data *data, int *i, int *j, char *word)
 {
 	char	quote;
 

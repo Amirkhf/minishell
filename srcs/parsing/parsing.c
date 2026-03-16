@@ -6,12 +6,13 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 16:24:26 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/12 14:48:32 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/16 14:18:02 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+static int	check_lexer(t_token **token);
 int	parsing(t_data *data, t_token **token)
 {
 	printf("je suis dans le parsing\n");
@@ -21,7 +22,7 @@ int	parsing(t_data *data, t_token **token)
 }
 
 // checks for syntax errors
-int	check_lexer(t_token **token)
+static int	check_lexer(t_token **token)
 {
 	t_token	*tmp;
 

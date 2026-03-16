@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 10:26:25 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/09 15:04:33 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/16 12:38:34 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_token	*token_line(t_data *data)
 
 	i = 0;
 	data->token = NULL;
+	data->last_token = NULL;
 	while (data->line[i])
 	{
 		if (is_space(data->line[i]))
@@ -101,7 +102,7 @@ static void	take_small_operator(t_data *data, int operator, int * i)
 }
 
 //  Verifie si un caractère est un espace ou tabulation
- bool	is_space(char c)
+bool	is_space(char c)
 {
 	if (c == ' ' || c == '\t')
 		return (1);
