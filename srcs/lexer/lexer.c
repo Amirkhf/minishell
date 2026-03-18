@@ -28,7 +28,7 @@ t_token	*token_line(t_data *data)
 	{
 		if (is_space(data->line[i]))
 			i++;
-		else if ((what_operator(data->line, &i)) <= 6)
+		else if ((what_operator(data->line, &i)) != -1)
 		{
 			operator= what_operator(data->line, &i);
 			if (operator>= HEREDOC && operator<= APPEND)
@@ -45,20 +45,19 @@ t_token	*token_line(t_data *data)
 	return (data->token);
 }
 
-// Identifie et ajoute un opérateur (modifier cette fonction plus tard)
-static int	what_operator(char *str, int *i)
+static int  what_operator(char *str, int *i)
 {
-	if (!(ft_strncmp(str + *i, HEREDOC_C, 2)))
-		return (HEREDOC);
-	else if (!(ft_strncmp(str + *i, APPEND_C, 2)))
-		return (APPEND);
-	else if (!(ft_strncmp(str + *i, REDIR_OUT_C, 1)))
-		return (REDIR_OUT);
-	else if (!(ft_strncmp(str + *i, REDIR_IN_C, 1)))
-		return (REDIR_IN);
-	else if (!(ft_strncmp(str + *i, PIPE_C, 1)))
-		return (PIPE);
-	return (7);
+    if (!(ft_strncmp(str + *i, HEREDOC_C, 2)))
+        return (HEREDOC);
+    else if (!(ft_strncmp(str + *i, APPEND_C, 2)))
+        return (APPEND);
+    else if (!(ft_strncmp(str + *i, REDIR_OUT_C, 1)))
+        return (REDIR_OUT);
+    else if (!(ft_strncmp(str + *i, REDIR_IN_C, 1)))
+        return (REDIR_IN);
+    else if (!(ft_strncmp(str + *i, PIPE_C, 1)))
+        return (PIPE);
+    return (-1);
 }
 
 // ajoute a la liste de token si c un >> ou <<
