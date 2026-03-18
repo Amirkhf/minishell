@@ -74,7 +74,8 @@ void	copy_env_value(t_data *data, char *new_str, int *i, int *j,
 	while (data->env[a])
 	{
 		if (ft_strncmp(data->env[a], name_variable,
-				ft_strlen(name_variable)) == 0 && data->env[a][len] == '=')
+				ft_strlen(name_variable)) == 0
+			&& data->env[a][ft_strlen(name_variable)] == '=')
 		{
 			b += ft_strlen(name_variable) + 1; // Passe le nom et le '='
 			while (data->env[a][b])

@@ -77,22 +77,21 @@ static void	take_big_operator(t_data *data, int operator, int * i)
 	}
 }
 
-// ajoute a la liste de token si c | < >
-static void	take_small_operator(t_data *data, int operator, int * i)
+static void	take_small_operator(t_data *data, int operator, int *i)
 {
-	if (operator== 2)
+	if (operator == PIPE)
 	{
 		if (!(add_token(data, &data->token, PIPE, "|")))
 			my_exit(&data->garbage_tmp, &data->garbage_perm, EXIT_FAILURE);
 		(*i)++;
 	}
-	else if (operator== 3)
+	else if (operator == REDIR_IN)
 	{
 		if (!(add_token(data, &data->token, REDIR_IN, "<")))
 			my_exit(&data->garbage_tmp, &data->garbage_perm, EXIT_FAILURE);
 		(*i)++;
 	}
-	else if (operator== 4)
+	else if (operator == REDIR_OUT)
 	{
 		if (!(add_token(data, &data->token, REDIR_OUT, ">")))
 			my_exit(&data->garbage_tmp, &data->garbage_perm, EXIT_FAILURE);

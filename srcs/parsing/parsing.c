@@ -21,26 +21,27 @@ int	parsing(t_data *data, t_token **token)
 	return (0);
 }
 
-// checks for syntax errors
-static int	check_lexer(t_token **token)
+int	check_lexer(t_token **token)
 {
 	t_token	*tmp;
 
-	printf("je suis dans la fonction check_lexer\n");
 	tmp = *token;
 	if (!(tmp))
 		return (EXIT_FAILURE);
+	
 	if (tmp->type == PIPE)
 		return (syntax_error("|"), EXIT_FAILURE);
-	while (tmp->next != NULL)
+		
+	while (tmp)
 	{
-		if (tmp->prev && is_operator(tmp->str) && is_operator(tmp->str))
-			return (syntax_error(tmp->str), EXIT_FAILURE);
+		if (tmp->type >= PIPE && tmp->type <= APPEND)
+		{
+			if (tmp->next == NULL)
+				return (syntax_error("newline"), EXIT_FAILURE);
+			if (tmp->next->type >= PIPE && tmp->next->type <= APPEND)
+				return (syntax_error(tmp->next->str), EXIT_FAILURE);
+		}
 		tmp = tmp->next;
 	}
-	if (tmp->prev && is_operator(tmp->str) && is_operator(tmp->str))
-		return (syntax_error(tmp->str), EXIT_FAILURE);
-	else if (tmp->type > 1)
-		return (syntax_error("newline"), EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

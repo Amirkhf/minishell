@@ -24,7 +24,8 @@ int	len_var_env(t_data *data, char *name_variable)
 	while (data->env[i])
 	{
 		if (ft_strncmp(data->env[i], name_variable,
-				ft_strlen(name_variable)) == 0 && data->env[i][len_name] == '=')
+				ft_strlen(name_variable)) == 0
+			&& data->env[i][ft_strlen(name_variable)] == '=')
 		{
 			while (data->env[i][a] != '=')
 				a++;
@@ -58,7 +59,7 @@ long long	expanded_len(t_data *data, char *str)
 			name_variable = extract_var_name(data, str, &i);
 			if (name_variable)
 				len += len_var_env(data, name_variable);
-			continue;
+			continue ;
 		}
 		len++;
 		i++;
