@@ -24,7 +24,7 @@ int	len_var_env(t_data *data, char *name_variable)
 	while (data->env[i])
 	{
 		if (ft_strncmp(data->env[i], name_variable,
-				ft_strlen(name_variable)) == 0)
+				ft_strlen(name_variable)) == 0 && data->env[i][len_name] == '=')
 		{
 			while (data->env[i][a] != '=')
 				a++;
