@@ -6,7 +6,7 @@
 /*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 08:27:35 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/19 18:33:22 by amary            ###   ########.fr       */
+/*   Updated: 2026/03/19 19:18:45 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void	loop(t_data *data)
 			free_all(&data->garbage_tmp);
 			continue ;
 		}
-		ft_exec(data);
+		build_cmds(data);
+		my_exec(data);
 		free_all(&data->garbage_tmp);
 	}
 }

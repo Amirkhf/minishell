@@ -6,20 +6,20 @@
 /*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 17:53:45 by amary             #+#    #+#             */
-/*   Updated: 2026/03/19 18:18:17 by amary            ###   ########.fr       */
+/*   Updated: 2026/03/19 19:50:41 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-int	ft_env(char **env)
+void	ft_env(char **env)
 {
 	int	j;
 
 	j = 0;
 	if (!env)
-		return (0);
+		return ;
 	while (env[j])
 		printf("%s\n", env[j++]);
-	return (0);
+	return ;
 }

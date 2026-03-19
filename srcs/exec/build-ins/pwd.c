@@ -6,25 +6,18 @@
 /*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:02:07 by amary             #+#    #+#             */
-/*   Updated: 2026/03/19 18:18:11 by amary            ###   ########.fr       */
+/*   Updated: 2026/03/19 19:52:10 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-int	ft_pwd(char **env)
+void	ft_pwd(void)
 {
-	int	j;
+	char	cwd[1024];
 
-	j = 0;
-	while (env[j])
-	{
-		if (ft_strncmp(env[j], "PWD", 3) == 0)
-		{
-			printf("%s\n", &env[j][4]);
-			break;
-		}	
-		j++;
-	}
-	return (0);
+	if (getcwd(cwd, sizeof(cwd)) != NULL)
+		printf("%s\n", cwd);
+	else
+		perror("minishell: pwd");
 }

@@ -6,7 +6,7 @@
 /*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 08:29:06 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/19 18:18:49 by amary            ###   ########.fr       */
+/*   Updated: 2026/03/19 19:50:27 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,22 @@ typedef struct s_garbage
 	struct s_garbage	*next;
 }						t_garbage;
 
+typedef struct s_redir
+{
+	int				type;   // REDIR_IN, REDIR_OUT, HEREDOC, APPEND
+	char			*file;  // Le nom du fichier ou le délimiteur du heredoc
+	struct s_redir	*next;
+}					t_redir;
+
+typedef struct s_cmd
+{
+	char			**args; // Le tableau pour execve
+	t_redir			*redirs; // La liste des redirections pour cette commande spécifique
+	int				fd_in;  // Fd pour l'entrée
+	int				fd_out; // Fd pour la sortie
+	struct s_cmd	*next;
+}					t_cmd;
+
 typedef struct s_data
 {
 	char				*line;
@@ -67,6 +83,7 @@ typedef struct s_data
 	t_garbage			*garbage_perm;
 	t_token				*last_token;
 	t_token				*token;
+	t_cmd				*cmds;
 }						t_data;
 
 int						init_struct(t_data *data, char **env);
@@ -111,7 +128,22 @@ void					syntax_error(char *str);
 void					msg_error_quote(void);
 void					print_token(t_data *data);
 void					print_double_tab(char **str);
-int						ft_env(char **env);
-int						ft_pwd(char **env);
+void					ft_env(char **env);
+void					ft_pwd(void);
+void					build_cmds(t_data *data);
+void					fill_cmd(t_data *data, t_cmd *cmd, t_token **tok_cpy);
+int						count_args(t_token *token);
+void					add_redir(t_data *data, t_cmd *cmd, int type, char *file);
+t_cmd					*new_cmd(t_data *data);
+char					*get_cmd_path(t_data *data, char *cmd_name);
+char					*check(char *cmd_name, char **env);
+char					*get_env_path(char **envp, char *key);
+bool					has_slash(char *str);
+void					my_exec(t_data *data);
+void					exec_simple_cmd(t_data *data, t_cmd *cmd);
+bool					is_builtin(char *cmd_name);
+void					ft_cd(t_data *data, t_cmd *cmd);
+void					ft_exit(t_data *data);
+void					exec_builtin(t_data *data, t_cmd *cmd);
 
 #endif
