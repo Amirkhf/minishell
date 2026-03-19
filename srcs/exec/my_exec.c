@@ -6,7 +6,7 @@
 /*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 19:14:04 by amary             #+#    #+#             */
-/*   Updated: 2026/03/19 19:52:19 by amary            ###   ########.fr       */
+/*   Updated: 2026/03/19 22:03:28 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	exec_simple_cmd(t_data *data, t_cmd *cmd)
 void	my_exec(t_data *data)
 {
 	if (!data->cmds || !data->cmds->args || !data->cmds->args[0])
-		return ;
-	if (!data->cmds->next && is_builtin(data->cmds->args[0]))
+		my_exit(data->garbage_tmp, data->garbage_perm, EXIT_FAILURE);
+	else if (!data->cmds->next && is_builtin(data->cmds->args[0]))
 	{
 		exec_builtin(data, data->cmds);
 		return ;
