@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 08:29:06 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/16 14:17:31 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/19 18:18:49 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,4 +111,7 @@ void					syntax_error(char *str);
 void					msg_error_quote(void);
 void					print_token(t_data *data);
 void					print_double_tab(char **str);
+int						ft_env(char **env);
+int						ft_pwd(char **env);
+
 #endif

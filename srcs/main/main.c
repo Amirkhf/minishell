@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 08:27:35 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/16 13:08:41 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/19 18:33:22 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	loop(t_data *data)
 			free_all(&data->garbage_tmp);
 			continue ;
 		}
-		print_token(data);
+		ft_exec(data);
 		free_all(&data->garbage_tmp);
 	}
 }

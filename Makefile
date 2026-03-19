@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+         #
+#    By: amary <amary@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/26 09:36:23 by amkhelif          #+#    #+#              #
-#    Updated: 2026/03/10 14:45:52 by amkhelif         ###   ########.fr        #
+#    Updated: 2026/03/19 18:16:10 by amary            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,9 @@ SRC = 	libft/ft_double_str_len.c \
 		srcs/parsing/utils.c \
 		srcs/parsing/expander/expander.c \
 		srcs/parsing/expander/expander_utils.c \
-		srcs/poubelle/poubelle.c
+		srcs/poubelle/poubelle.c \
+		srcs/exec/build-ins/pwd.c \
+		srcs/exec/build-ins/env.c \
 
 OBJ = $(SRC:.c=.o)
 
