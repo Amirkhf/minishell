@@ -6,7 +6,7 @@
 /*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 08:29:06 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/19 19:50:27 by amary            ###   ########.fr       */
+/*   Updated: 2026/03/20 01:06:52 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,5 +145,8 @@ bool					is_builtin(char *cmd_name);
 void					ft_cd(t_data *data, t_cmd *cmd);
 void					ft_exit(t_data *data);
 void					exec_builtin(t_data *data, t_cmd *cmd);
-
+void					handle_redirections(t_cmd *cmd);
+void					action_redird(int fd, t_redir *redir);
+void					action_redirr(int fd, t_redir *redir);
+void					action_HEREDOC(int fd, t_redir *redir);
 #endif

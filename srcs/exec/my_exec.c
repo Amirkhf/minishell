@@ -6,7 +6,7 @@
 /*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 19:14:04 by amary             #+#    #+#             */
-/*   Updated: 2026/03/19 22:03:28 by amary            ###   ########.fr       */
+/*   Updated: 2026/03/20 00:49:40 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	exec_simple_cmd(t_data *data, t_cmd *cmd)
 	}
 	if (pid == 0)
 	{
+		handle_redirections(cmd);
 		execve(cmd_path, cmd->args, data->env);
 		perror("execve");
 		exit(127);
