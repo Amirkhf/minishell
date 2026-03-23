@@ -91,11 +91,8 @@ typedef struct s_data
 	t_garbage			*garbage_perm;
 	t_token				*last_token;
 	t_token				*token;
-<<<<<<< HEAD
 	int					exit_status;
-=======
 	t_cmd				*cmds;
->>>>>>> 7c289c1f80472e3962633637f90f0d8c6fe4e50c
 }						t_data;
 
 void					remove_quote(t_data *data);

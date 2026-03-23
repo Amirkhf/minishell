@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 10:26:25 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/16 14:35:29 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/23 14:06:21 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ t_token	*token_line(t_data *data)
 
 static int  what_operator(char *str, int *i)
 {
-<<<<<<< HEAD
 	if (!(ft_strncmp(str + *i, HEREDOC_C, 2)))
 		return (HEREDOC);
 	else if (!(ft_strncmp(str + *i, APPEND_C, 2)))
@@ -59,19 +58,6 @@ static int  what_operator(char *str, int *i)
 	else if (!(ft_strncmp(str + *i, PIPE_C, 1)))
 		return (PIPE);
 	return (-1);
-=======
-    if (!(ft_strncmp(str + *i, HEREDOC_C, 2)))
-        return (HEREDOC);
-    else if (!(ft_strncmp(str + *i, APPEND_C, 2)))
-        return (APPEND);
-    else if (!(ft_strncmp(str + *i, REDIR_OUT_C, 1)))
-        return (REDIR_OUT);
-    else if (!(ft_strncmp(str + *i, REDIR_IN_C, 1)))
-        return (REDIR_IN);
-    else if (!(ft_strncmp(str + *i, PIPE_C, 1)))
-        return (PIPE);
-    return (-1);
->>>>>>> 7c289c1f80472e3962633637f90f0d8c6fe4e50c
 }
 
 // ajoute a la liste de token si c un >> ou <<
