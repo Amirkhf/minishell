@@ -6,7 +6,11 @@
 /*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 08:29:06 by amkhelif          #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2026/03/23 12:57:51 by amkhelif         ###   ########.fr       */
+=======
 /*   Updated: 2026/03/20 01:06:52 by amary            ###   ########.fr       */
+>>>>>>> 7c289c1f80472e3962633637f90f0d8c6fe4e50c
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +47,10 @@ typedef enum e_token_type
 	HEREDOC,
 	APPEND
 }						t_token_type;
+
+typedef struct s_cmd
+{
+}						t_cmd;
 
 typedef struct s_token
 {
@@ -83,9 +91,14 @@ typedef struct s_data
 	t_garbage			*garbage_perm;
 	t_token				*last_token;
 	t_token				*token;
+<<<<<<< HEAD
+	int					exit_status;
+=======
 	t_cmd				*cmds;
+>>>>>>> 7c289c1f80472e3962633637f90f0d8c6fe4e50c
 }						t_data;
 
+void					remove_quote(t_data *data);
 int						init_struct(t_data *data, char **env);
 char					**extract_env(t_data *data, char **env);
 void					*my_malloc(t_data *data, size_t size, bool type);
@@ -114,7 +127,7 @@ char					*ft_substr(char const *s, unsigned int start,
 							size_t len);
 char					*ft_strjoin(t_data *data, char const *s1,
 							char const *s2);
-							 int	parsing(t_data *data, t_token **token);
+int						parsing(t_data *data, t_token **token);
 int						ft_strncmp(const char *s1, const char *s2, size_t n);
 size_t					ft_strlen(const char *s);
 long long				ft_double_str_len(char **str);

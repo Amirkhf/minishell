@@ -6,13 +6,14 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 12:43:15 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/16 14:16:45 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/23 13:09:22 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
 static char	*expand_word(t_data *data, char *str);
+static void	expand_exit_status(t_data *data, char *new_str, int *i, int *j);
 
 char	*expander(t_data *data)
 {
@@ -48,21 +49,20 @@ static char	*expand_word(t_data *data, char *str)
 	{
 		if (str[i] == '$' && !(is_simple_quote(str, i)))
 		{
+			if (str[i + 1] == '?')
+			{
+				expand_exit_status(data, new_str, &i, &j);
+				continue ;
+			}
 			a = i;
-			copy_env_value(data, new_str, &i, &j, extract_var_name(data, str,
-					&a));
+			copy_env_value(data, new_str, &i, &j, extract_var_name(data, str, &a));
 			continue ;
 		}
-		if (str[i] != '\'')
-			new_str[j++] = str[i++];
-		else
-			i++;
+		new_str[j++] = str[i++];
 	}
-	new_str[j] = '\0';
-	return (new_str);
+	return (new_str[j] = '\0', new_str);
 }
 
-// Ajoute char *new_str dans les paramètres
 void	copy_env_value(t_data *data, char *new_str, int *i, int *j,
 		char *name_variable)
 {
@@ -77,10 +77,9 @@ void	copy_env_value(t_data *data, char *new_str, int *i, int *j,
 				ft_strlen(name_variable)) == 0
 			&& data->env[a][ft_strlen(name_variable)] == '=')
 		{
-			b += ft_strlen(name_variable) + 1; // Passe le nom et le '='
+			b += ft_strlen(name_variable) + 1;
 			while (data->env[a][b])
 			{
-				// ON ÉCRIT DANS new_str ET PAS DANS data->new_line
 				new_str[*j] = data->env[a][b];
 				(*j)++;
 				b++;
@@ -89,7 +88,7 @@ void	copy_env_value(t_data *data, char *new_str, int *i, int *j,
 		}
 		a++;
 	}
-	(*i) += ft_strlen(name_variable) + 1; // +1 pour le '$'
+	(*i) += ft_strlen(name_variable) + 1;
 }
 
 void	copy_name_variable(t_data *data, int *j, char *name_variable)
@@ -124,4 +123,20 @@ int	is_simple_quote(char *str, int index_dollar)
 		j++;
 	}
 	return (in_single_quote);
+}
+
+static void	expand_exit_status(t_data *data, char *new_str, int *i, int *j)
+{
+	char *status_str;
+	int k;
+
+	status_str = my_itoa(data, data->exit_status);
+	k = 0;
+	while (status_str[k])
+	{
+		new_str[*j] = status_str[k];
+		(*j)++;
+		k++;
+	}
+	(*i) += 2;
 }
