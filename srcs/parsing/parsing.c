@@ -6,18 +6,19 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 16:24:26 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/16 14:18:02 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/23 12:45:48 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 static int	check_lexer(t_token **token);
+
 int	parsing(t_data *data, t_token **token)
 {
-	printf("je suis dans le parsing\n");
 	if (check_lexer(token) || expander(data))
 		return (EXIT_FAILURE);
+	remove_quote(data);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 16:33:58 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/16 13:01:29 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/23 13:02:53 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ long long	expanded_len(t_data *data, char *str)
 	int		i;
 	int		len;
 	char	*name_variable;
+	char	*status_str;
 
 	name_variable = my_malloc(data, ft_strlen(data->line) + 1, TMP);
 	if (!(name_variable))
@@ -54,6 +55,13 @@ long long	expanded_len(t_data *data, char *str)
 	i = 0;
 	while (str && str[i])
 	{
+		if (str[i] == '$' && str[i + 1] == '?')
+		{
+			status_str = my_itoa(data, data->exit_status);
+			len += ft_strlen(status_str);
+			i += 2;
+			continue ;
+		}
 		if (str[i] == '$')
 		{
 			name_variable = extract_var_name(data, str, &i);

@@ -6,7 +6,11 @@
 #    By: amary <amary@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/26 09:36:23 by amkhelif          #+#    #+#              #
+<<<<<<< HEAD
+#    Updated: 2026/03/23 12:47:43 by amkhelif         ###   ########.fr        #
+=======
 #    Updated: 2026/03/20 00:31:40 by amary            ###   ########.fr        #
+>>>>>>> 7c289c1f80472e3962633637f90f0d8c6fe4e50c
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +44,10 @@ SRC = 	libft/ft_double_str_len.c \
 		srcs/parsing/utils.c \
 		srcs/parsing/expander/expander.c \
 		srcs/parsing/expander/expander_utils.c \
+<<<<<<< HEAD
+		srcs/parsing/quote_remove.c \
+		srcs/poubelle/poubelle.c
+=======
 		srcs/poubelle/poubelle.c \
 		srcs/exec/parsing/get_path.c \
 		srcs/exec/parsing/build_cmd.c \
@@ -48,6 +56,7 @@ SRC = 	libft/ft_double_str_len.c \
 		srcs/exec/build-ins/env.c \
 		srcs/exec/build-ins/builtins.c \
 		srcs/exec/redirections.c \
+>>>>>>> 7c289c1f80472e3962633637f90f0d8c6fe4e50c
 
 OBJ = $(SRC:.c=.o)
 
