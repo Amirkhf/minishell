@@ -6,7 +6,7 @@
 #    By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/26 09:36:23 by amkhelif          #+#    #+#              #
-#    Updated: 2026/03/23 14:17:45 by amkhelif         ###   ########.fr        #
+#    Updated: 2026/03/23 14:40:30 by amkhelif         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRC = 	libft/ft_double_str_len.c \
 		libft/ft_substr.c \
 		libft/ft_isalpha.c \
 		libft/ft_strdup.c \
+		libft/ft_itoa.c \
 		libft/ft_strlen.c \
 		libft/ft_strncmp.c \
 		libft/ft_expanded_len.c \

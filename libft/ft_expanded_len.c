@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 16:33:58 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/23 13:02:53 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/23 14:41:04 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ long long	expanded_len(t_data *data, char *str)
 	{
 		if (str[i] == '$' && str[i + 1] == '?')
 		{
-			status_str = my_itoa(data, data->exit_status);
+			status_str = ft_itoa(data, data->exit_status);
 			len += ft_strlen(status_str);
 			i += 2;
 			continue ;

@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
+/*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 08:29:06 by amkhelif          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2026/03/23 12:57:51 by amkhelif         ###   ########.fr       */
-=======
-/*   Updated: 2026/03/20 01:06:52 by amary            ###   ########.fr       */
->>>>>>> 7c289c1f80472e3962633637f90f0d8c6fe4e50c
+/*   Updated: 2026/03/23 14:36:51 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +44,6 @@ typedef enum e_token_type
 	APPEND
 }						t_token_type;
 
-typedef struct s_cmd
-{
-}						t_cmd;
-
 typedef struct s_token
 {
 	char				*str;
@@ -68,19 +60,19 @@ typedef struct s_garbage
 
 typedef struct s_redir
 {
-	int				type;   // REDIR_IN, REDIR_OUT, HEREDOC, APPEND
-	char			*file;  // Le nom du fichier ou le délimiteur du heredoc
-	struct s_redir	*next;
-}					t_redir;
+	int type;   // REDIR_IN, REDIR_OUT, HEREDOC, APPEND
+	char *file; // Le nom du fichier ou le délimiteur du heredoc
+	struct s_redir		*next;
+}						t_redir;
 
 typedef struct s_cmd
 {
-	char			**args; // Le tableau pour execve
-	t_redir			*redirs; // La liste des redirections pour cette commande spécifique
-	int				fd_in;  // Fd pour l'entrée
-	int				fd_out; // Fd pour la sortie
-	struct s_cmd	*next;
-}					t_cmd;
+	char **args;     // Le tableau pour execve
+	t_redir *redirs; // La liste des redirections pour cette commande spécifique
+	int fd_in;       // Fd pour l'entrée
+	int fd_out;      // Fd pour la sortie
+	struct s_cmd		*next;
+}						t_cmd;
 
 typedef struct s_data
 {
@@ -95,6 +87,7 @@ typedef struct s_data
 	t_cmd				*cmds;
 }						t_data;
 
+char					*ft_itoa(t_data *data, int n);
 void					remove_quote(t_data *data);
 int						init_struct(t_data *data, char **env);
 char					**extract_env(t_data *data, char **env);
@@ -143,7 +136,8 @@ void					ft_pwd(void);
 void					build_cmds(t_data *data);
 void					fill_cmd(t_data *data, t_cmd *cmd, t_token **tok_cpy);
 int						count_args(t_token *token);
-void					add_redir(t_data *data, t_cmd *cmd, int type, char *file);
+void					add_redir(t_data *data, t_cmd *cmd, int type,
+							char *file);
 t_cmd					*new_cmd(t_data *data);
 char					*get_cmd_path(t_data *data, char *cmd_name);
 char					*check(char *cmd_name, char **env);

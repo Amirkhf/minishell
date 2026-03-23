@@ -130,7 +130,7 @@ static void	expand_exit_status(t_data *data, char *new_str, int *i, int *j)
 	char *status_str;
 	int k;
 
-	status_str = my_itoa(data, data->exit_status);
+	status_str = ft_itoa(data, data->exit_status);
 	k = 0;
 	while (status_str[k])
 	{
