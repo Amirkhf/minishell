@@ -6,14 +6,14 @@
 /*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/20 00:23:57 by amary             #+#    #+#             */
-/*   Updated: 2026/03/20 01:10:20 by amary            ###   ########.fr       */
+/*   Updated: 2026/03/24 12:05:54 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include <fcntl.h>
 
-int	action_heredoc(t_redir *redir)
+int	action_heredoc2(t_redir *redir)
 {
 	int		fd;
 	char	*line;
@@ -24,8 +24,8 @@ int	action_heredoc(t_redir *redir)
 	while (1)
 	{
 		line = readline("> ");
-		if (!line || (ft_strncmp(line, redir->file, ft_strlen(redir->file)) == 0 
-					  && ft_strlen(line) == ft_strlen(redir->file)))
+		if (!line || (ft_strncmp(line, redir->file, ft_strlen(redir->file)) == 0
+				&& ft_strlen(line) == ft_strlen(redir->file)))
 		{
 			free(line);
 			break ;
@@ -62,9 +62,9 @@ void	action_redird(int fd, t_redir *redir)
 	close(fd);
 }
 
-void	action_HEREDOC(int fd, t_redir *redir)
+void	action_heredoc(int fd, t_redir *redir)
 {
-	fd = action_heredoc(redir);
+	fd = action_heredoc2(redir);
 	if (fd == -1)
 	{
 		perror("minishell: heredoc");
@@ -74,6 +74,7 @@ void	action_HEREDOC(int fd, t_redir *redir)
 	close(fd);
 	return ;
 }
+
 void	handle_redirections(t_cmd *cmd)
 {
 	t_redir	*redir;
@@ -82,11 +83,11 @@ void	handle_redirections(t_cmd *cmd)
 	redir = cmd->redirs;
 	while (redir)
 	{
-		if (redir->type == REDIR_OUT) // Gestion du (>)
+		if (redir->type == REDIR_OUT)
 			action_redirr(fd, redir);
-		else if (redir->type == APPEND) // Gestion du (>>)
+		else if (redir->type == APPEND)
 			action_redird(fd, redir);
-		else if (redir->type == REDIR_IN) // Gestion du ('<')
+		else if (redir->type == REDIR_IN)
 		{
 			fd = open(redir->file, O_RDONLY);
 			if (fd == -1)
@@ -98,7 +99,7 @@ void	handle_redirections(t_cmd *cmd)
 			close(fd);
 		}
 		else if (redir->type == HEREDOC)
-			action_HEREDOC(fd, redir);
+			action_heredoc(fd, redir);
 		redir = redir->next;
 	}
 }

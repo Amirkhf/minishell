@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 08:29:06 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/23 14:36:51 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/24 12:41:56 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,5 +152,8 @@ void					exec_builtin(t_data *data, t_cmd *cmd);
 void					handle_redirections(t_cmd *cmd);
 void					action_redird(int fd, t_redir *redir);
 void					action_redirr(int fd, t_redir *redir);
-void					action_HEREDOC(int fd, t_redir *redir);
+void					action_heredoc(int fd, t_redir *redir);
+void					setup_signals(void);
+void					handle_sigint(int sig);
+
 #endif
