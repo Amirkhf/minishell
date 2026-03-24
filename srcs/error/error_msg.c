@@ -6,12 +6,11 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 16:51:48 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/06 16:52:46 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/24 15:30:44 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
 
 void	syntax_error(char *str)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
+/*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 19:33:01 by amary             #+#    #+#             */
-/*   Updated: 2026/03/19 21:08:15 by amary            ###   ########.fr       */
+/*   Updated: 2026/03/24 17:44:14 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,6 @@ void	exec_builtin(t_data *data, t_cmd *cmd)
 		ft_exit(data);
 	else if (ft_strncmp(name, "pwd", 4) == 0)
 		ft_pwd();
+	else if (ft_strncmp(name, "echo", 5) == 0) 
+		my_echo(data,cmd);
 }

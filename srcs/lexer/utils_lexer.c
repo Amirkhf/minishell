@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 13:45:08 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/16 14:15:00 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/24 15:43:14 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,15 @@ int	take_cmd(t_data *data, int *i)
 
 bool	is_operator(char *line)
 {
-	if (!(strncmp(line, HEREDOC_C, 2)))
+	if (!(strncmp(line, HEREDOC_C, (long unsigned int)2)))
 		return (1);
-	else if (!(strncmp(line, APPEND_C, 2)))
+	else if (!(strncmp(line, APPEND_C, (long unsigned int)2)))
 		return (1);
-	else if (!(strncmp(line, PIPE_C, 1)))
+	else if (!(strncmp(line, PIPE_C, (long unsigned int)1)))
 		return (1);
-	else if (!(strncmp(line, REDIR_IN_C, 1)))
+	else if (!(strncmp(line, REDIR_IN_C, (long unsigned int)1)))
 		return (1);
-	else if (!(strncmp(line, REDIR_OUT_C, 1)))
+	else if (!(strncmp(line, REDIR_OUT_C, (long unsigned int)1)))
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 08:29:06 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/23 14:36:51 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/24 17:49:11 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 # define MINI_SHELL_H
 
 # include <limits.h>
+# include <stdio.h>
+
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <stdbool.h>
-# include <stdio.h>
 # include <stdlib.h>
+# include <string.h>
 # include <unistd.h>
 
 # define TMP 0
@@ -96,10 +98,12 @@ void					gc_add(t_garbage **lst, void *data);
 void					free_all(t_garbage **gc);
 void					my_exit(t_garbage **gc_tmp, t_garbage **gc_perm,
 							int exit_status);
+							void my_echo(t_data *data, t_cmd *cmd);
 void					copy_env_value(t_data *data, char *new_str, int *i,
 							int *j, char *name_variable);
 t_garbage				*ft_lstnew_gc(void *value);
 int						my_readline(t_data *data);
+char					*ft_itoa(t_data *data, int n);
 t_token					*token_line(t_data *data);
 int						take_cmd(t_data *data, int *i);
 bool					add_token(t_data *data, t_token **token_lst,

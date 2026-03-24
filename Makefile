@@ -6,7 +6,7 @@
 #    By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/26 09:36:23 by amkhelif          #+#    #+#              #
-#    Updated: 2026/03/23 14:40:30 by amkhelif         ###   ########.fr        #
+#    Updated: 2026/03/24 17:49:11 by amkhelif         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRC = 	libft/ft_double_str_len.c \
 		libft/ft_strncmp.c \
 		libft/ft_expanded_len.c \
 		libft/ft_strjoin.c \
+		libft/my_itoa.c \
 		srcs/error/error_msg.c \
 		srcs/init/init_struct.c \
 		srcs/init/extract_path.c \
@@ -38,10 +39,11 @@ SRC = 	libft/ft_double_str_len.c \
 		srcs/memory/free.c \
 		srcs/memory/garbage.c \
 		srcs/parsing/parsing.c \
+		srcs/exec/build-ins/echo.c \
+		srcs/parsing/quote_remove.c \
 		srcs/parsing/utils.c \
 		srcs/parsing/expander/expander.c \
 		srcs/parsing/expander/expander_utils.c \
-		srcs/parsing/quote_remove.c \
 		srcs/poubelle/poubelle.c \
 		srcs/exec/parsing/get_path.c \
 		srcs/exec/parsing/build_cmd.c \

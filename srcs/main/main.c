@@ -6,7 +6,7 @@
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 08:27:35 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/23 14:51:37 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/24 17:49:11 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,10 @@ void	loop(t_data *data)
 int	main(int argc, char **argv, char **env)
 {
 	t_data	data;
-	int		i;
+	
 
 	argc = 0;
 	argv = NULL;
-	i = 0;
 	if (init_struct(&data, env))
 		return (EXIT_FAILURE);
 	loop(&data);
