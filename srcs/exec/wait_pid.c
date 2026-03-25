@@ -1,41 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   wait_pid.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/06 16:48:09 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/25 12:54:18 by amary            ###   ########.fr       */
+/*   Created: 2026/03/25 12:46:57 by amary             #+#    #+#             */
+/*   Updated: 2026/03/25 13:47:31 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-// Libère toute la mémoire d'une liste GC
-void	free_all(t_garbage **gc)
+void	wait_pipeline(t_data *data, pid_t pid)
 {
-	t_garbage	*tmp;
-	t_garbage	*lst;
+	int	status;
 
-	if (!gc || !*gc)
-		return ;
-	lst = *gc;
-	while (lst)
+	waitpid(pid, &status, 0);
+	if (WIFEXITED(status))
+		data->exit_status = WEXITSTATUS(status);
+	else if (WIFSIGNALED(status))
 	{
-		tmp = lst->next;
-		if (lst->data)
-			free(lst->data);
-		free(lst);
-		lst = tmp;
+		data->exit_status = 128 + WTERMSIG(status);
+		if (WTERMSIG(status) == SIGINT)
+			write(1, "\n", 1);
+		else if (WTERMSIG(status) == SIGQUIT)
+			write(1, "Quit (core dumped)\n", 19);
 	}
-	*gc = NULL;
-}
-
-// Libère la mémoire et quitte le programme
-void	my_exit(t_garbage **gc_tmp, t_garbage **gc_perm, int exit_status)
-{
-	free_all(gc_tmp);
-	free_all(gc_perm);
-	exit(exit_status);
+	while (waitpid(-1, NULL, 0) > 0)
+		;
 }

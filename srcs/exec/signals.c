@@ -6,13 +6,11 @@
 /*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 12:39:45 by amary             #+#    #+#             */
-/*   Updated: 2026/03/24 15:45:08 by amary            ###   ########.fr       */
+/*   Updated: 2026/03/25 13:50:09 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-#include <signal.h>
-#include <readline/readline.h>
 
 // 1. La fonction qui réagit quand on appuie sur Ctrl+C
 void	handle_sigint(int sig)

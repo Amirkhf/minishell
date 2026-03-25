@@ -6,14 +6,12 @@
 /*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 19:14:04 by amary             #+#    #+#             */
-/*   Updated: 2026/03/24 12:15:30 by amary            ###   ########.fr       */
+/*   Updated: 2026/03/25 14:24:57 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-#include <sys/wait.h>
 
-// Gère les dup2 pour l'enfant
 void	setup_child_pipes(t_cmd *cmd, int *fd, int prev_pipe)
 {
 	if (prev_pipe != -1)
@@ -30,7 +28,6 @@ void	setup_child_pipes(t_cmd *cmd, int *fd, int prev_pipe)
 	return ;
 }
 
-// Gère les close pour le parent et met à jour prev_pipe
 void	handle_parent(t_cmd *cmd, int *fd, int *prev_pipe)
 {
 	if (*prev_pipe != -1)
@@ -42,11 +39,12 @@ void	handle_parent(t_cmd *cmd, int *fd, int *prev_pipe)
 	}
 }
 
-// Exécute la commande (Built-in ou execve) et quitte l'enfant
 void	run_cmd(t_data *data, t_cmd *cmd)
 {
 	char	*path;
 
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 	if (is_builtin(cmd->args[0]))
 	{
 		exec_builtin(data, cmd);
@@ -56,7 +54,7 @@ void	run_cmd(t_data *data, t_cmd *cmd)
 	if (!path)
 	{
 		write(2, "minishell: command not found\n", 29);
-		exit(127);
+		my_exit(data->garbage_tmp, data->garbage_perm, 127);
 	}
 	execve(path, cmd->args, data->env);
 	perror("execve");
@@ -68,6 +66,7 @@ void	exec_pipeline(t_data *data, t_cmd *cmd)
 	int		fd[2];
 	int		prev_pipe;
 	pid_t	pid;
+	int		status;
 
 	prev_pipe = -1;
 	while (cmd)
@@ -78,14 +77,16 @@ void	exec_pipeline(t_data *data, t_cmd *cmd)
 		if (pid == 0)
 		{
 			setup_child_pipes(cmd, fd, prev_pipe);
-			handle_redirections(cmd);
+			if (handle_redirections(cmd) == 1)
+				my_exit(data->garbage_tmp, data->garbage_perm,
+					data->exit_status);
 			run_cmd(data, cmd);
 		}
 		handle_parent(cmd, fd, &prev_pipe);
 		cmd = cmd->next;
 	}
-	while (waitpid(-1, NULL, 0) > 0)
-		;
+	wait_pipeline(data, pid);
+	return ;
 }
 
 void	my_exec(t_data *data)
@@ -95,10 +96,11 @@ void	my_exec(t_data *data)
 	cmd = data->cmds;
 	if (!cmd || !cmd->args || !cmd->args[0])
 		return ;
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 	if (!cmd->next && is_builtin(cmd->args[0]))
-	{
-		exec_builtin(data, cmd);
-		return ;
-	}
-	exec_pipeline(data, cmd);
+		exec_single_builtin(data, cmd);
+	else
+		exec_pipeline(data, cmd);
+	setup_signals();
 }

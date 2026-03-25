@@ -6,7 +6,7 @@
 #    By: amary <amary@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/26 09:36:23 by amkhelif          #+#    #+#              #
-#    Updated: 2026/03/24 12:42:50 by amary            ###   ########.fr        #
+#    Updated: 2026/03/25 13:09:08 by amary            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,8 @@ SRC = 	libft/ft_double_str_len.c \
 		srcs/exec/build-ins/builtins.c \
 		srcs/exec/redirections.c \
 		srcs/exec/signals.c \
+		srcs/exec/wait_pid.c \
+		srcs/exec/exec_single_builtin.c \
 
 OBJ = $(SRC:.c=.o)
 

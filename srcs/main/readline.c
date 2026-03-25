@@ -6,7 +6,7 @@
 /*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 14:14:03 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/19 22:10:53 by amary            ###   ########.fr       */
+/*   Updated: 2026/03/25 15:42:07 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ int	my_readline(t_data *data)
 {
 	data->line = readline("Minishell : ");
 	if (!(data->line))
-		return (0);
+	{
+		printf("exit\n");
+		my_exit(&data->garbage_tmp, &data->garbage_perm, data->exit_status);
+	}
 	gc_add(&data->garbage_tmp, data->line);
 	if (count_quote(data->line) == true)
 	{

@@ -1,41 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   exec_single_builtin.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/06 16:48:09 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/25 12:54:18 by amary            ###   ########.fr       */
+/*   Created: 2026/03/25 13:32:15 by amary             #+#    #+#             */
+/*   Updated: 2026/03/25 13:33:31 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-// Libère toute la mémoire d'une liste GC
-void	free_all(t_garbage **gc)
+void	exec_single_builtin(t_data *data, t_cmd *cmd)
 {
-	t_garbage	*tmp;
-	t_garbage	*lst;
+	int	saved_stdin;
+	int	saved_stdout;
 
-	if (!gc || !*gc)
-		return ;
-	lst = *gc;
-	while (lst)
+	saved_stdin = dup(STDIN_FILENO);
+	saved_stdout = dup(STDOUT_FILENO);
+	if (handle_redirections(cmd) == 1)
+		data->exit_status = 1;
+	else
 	{
-		tmp = lst->next;
-		if (lst->data)
-			free(lst->data);
-		free(lst);
-		lst = tmp;
+		exec_builtin(data, cmd);
+		data->exit_status = 0;
 	}
-	*gc = NULL;
-}
-
-// Libère la mémoire et quitte le programme
-void	my_exit(t_garbage **gc_tmp, t_garbage **gc_perm, int exit_status)
-{
-	free_all(gc_tmp);
-	free_all(gc_perm);
-	exit(exit_status);
+	dup2(saved_stdin, STDIN_FILENO);
+	dup2(saved_stdout, STDOUT_FILENO);
+	close(saved_stdin);
+	close(saved_stdout);
 }

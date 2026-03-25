@@ -6,7 +6,7 @@
 /*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 08:29:06 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/24 12:41:56 by amary            ###   ########.fr       */
+/*   Updated: 2026/03/25 13:43:23 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+#include <sys/wait.h>
+#include <signal.h>
 
 # define TMP 0
 # define PERM 1
@@ -149,11 +151,13 @@ bool					is_builtin(char *cmd_name);
 void					ft_cd(t_data *data, t_cmd *cmd);
 void					ft_exit(t_data *data);
 void					exec_builtin(t_data *data, t_cmd *cmd);
-void					handle_redirections(t_cmd *cmd);
-void					action_redird(int fd, t_redir *redir);
-void					action_redirr(int fd, t_redir *redir);
-void					action_heredoc(int fd, t_redir *redir);
+int						handle_redirections(t_cmd *cmd);
+int						action_redird(t_redir *redir);
+int						action_redirr(t_redir *redir);
+int						action_heredoc(t_redir *redir);
 void					setup_signals(void);
 void					handle_sigint(int sig);
+void					wait_pipeline(t_data *data, pid_t pid);
+void					exec_single_builtin(t_data *data, t_cmd *cmd);
 
 #endif
