@@ -19,7 +19,10 @@ int	my_readline(t_data *data)
 {
 	data->line = readline("Minishell : ");
 	if (!(data->line))
-		return (0);
+	{
+		printf("exit\n");
+		my_exit(&data->garbage_tmp, &data->garbage_perm, data->exit_status);
+	}
 	gc_add(&data->garbage_tmp, data->line);
 	if (count_quote(data->line) == true)
 	{
