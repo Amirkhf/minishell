@@ -6,7 +6,7 @@
 /*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 12:55:43 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/26 20:16:22 by amary            ###   ########.fr       */
+/*   Updated: 2026/03/26 20:39:50 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,33 +54,45 @@ int	is_valid_identifier(char *str)
 	return (1);
 }
 
+char	*dup_perm(t_data *data, char *arg)
+{
+	int		i;
+	char	*str;
+
+	str = my_malloc(data, ft_strlen(arg) + 1, PERM);
+	i = -1;
+	while (arg[++i])
+		str[i] = arg[i];
+	str[i] = '\0';
+	return (str);
+}
+
 void	add_to_env(t_data *data, char *arg)
 {
 	int		i;
-	int		len;
-	char	**new_env;
+	int		l;
+	char	**new;
 
-	i = 0;
-	len = 0;
-	while (arg[len] && arg[len] != '=')
-		len++;
-	while (data->env[i])
-	{
-		if (ft_strncmp(data->env[i], arg, len) == 0 && (data->env[i][len] == '='
-					|| data->env[i][len] == '\0'))
-		{
-			data->env[i] = ft_strdup(data, arg);
-			return ;
-		}
-		i++;
-	}
-	new_env = my_malloc(data, sizeof(char *) * (i + 2), TMP);
+	l = 0;
+	while (arg[l] && arg[l] != '=')
+		l++;
 	i = -1;
 	while (data->env[++i])
-		new_env[i] = data->env[i];
-	new_env[i] = ft_strdup(data, arg);
-	new_env[i + 1] = NULL;
-	data->env = new_env;
+	{
+		if (!ft_strncmp(data->env[i], arg, l)
+			&& (!data->env[i][l] || data->env[i][l] == '='))
+		{
+			data->env[i] = dup_perm(data, arg);
+			return ;
+		}
+	}
+	new = my_malloc(data, sizeof(char *) * (i + 2), PERM); // <-- ICI ON UTILISE PERM
+	i = -1;
+	while (data->env[++i])
+		new[i] = data->env[i];
+	new[i] = dup_perm(data, arg);
+	new[i + 1] = NULL;
+	data->env = new;
 }
 
 void	ft_export(t_data *data, t_cmd *cmd)
