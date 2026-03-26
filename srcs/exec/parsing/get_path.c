@@ -6,7 +6,7 @@
 /*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:54:20 by amary             #+#    #+#             */
-/*   Updated: 2026/03/19 19:25:59 by amary            ###   ########.fr       */
+/*   Updated: 2026/03/26 19:30:27 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,11 @@ char	*get_env_path(char **envp, char *key)
 
 char	*check(char *cmd_name, char **env)
 {
-	if (cmd_name == NULL || cmd_name[0] == '\0' || env[0] == NULL)
+	(void)env;
+	if (cmd_name == NULL || cmd_name[0] == '\0')
 		return (NULL);
 	if (has_slash(cmd_name))
-	{
-		if (access(cmd_name, X_OK) == 0)
-			return (cmd_name);
-		else
-			return (NULL);
-	}
+		return (cmd_name);
 	return (NULL);
 }
 

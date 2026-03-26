@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 08:29:06 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/24 17:49:11 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/26 20:20:09 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <limits.h>
 # include <stdio.h>
-
+#include <errno.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <stdbool.h>
@@ -25,7 +25,7 @@
 # include <signal.h>
 # include <sys/wait.h>
 # include <sys/types.h>
-
+#include <fcntl.h>
 
 # define TMP 0
 # define PERM 1
@@ -156,7 +156,7 @@ void					my_exec(t_data *data);
 void					exec_simple_cmd(t_data *data, t_cmd *cmd);
 bool					is_builtin(char *cmd_name);
 void					ft_cd(t_data *data, t_cmd *cmd);
-void					ft_exit(t_data *data);
+void					ft_exit(t_data *data, t_cmd *cmd);
 void					exec_builtin(t_data *data, t_cmd *cmd);
 int						handle_redirections(t_cmd *cmd);
 int						action_redird(t_redir *redir);
@@ -166,4 +166,8 @@ void    				wait_pipeline(t_data *data, pid_t pid);
 void    				exec_single_builtin(t_data *data, t_cmd *cmd);
 void		    		setup_signals(void);
 void					exec_single_builtin(t_data *data, t_cmd *cmd);
+void					heredoc_child(int fd, t_redir *redir);\
+int						action_heredoc2(t_redir *redir);
+void					ft_export(t_data *data, t_cmd *cmd);
+
 #endif

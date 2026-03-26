@@ -6,7 +6,7 @@
 /*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 19:14:04 by amary             #+#    #+#             */
-/*   Updated: 2026/03/25 14:24:57 by amary            ###   ########.fr       */
+/*   Updated: 2026/03/26 20:02:35 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	run_cmd(t_data *data, t_cmd *cmd)
 	if (is_builtin(cmd->args[0]))
 	{
 		exec_builtin(data, cmd);
-		exit(0);
+		my_exit(data->garbage_tmp, data->garbage_perm,data->exit_status);
 	}
 	path = get_cmd_path(data, cmd->args[0]);
 	if (!path)
@@ -57,7 +57,9 @@ void	run_cmd(t_data *data, t_cmd *cmd)
 		my_exit(&data->garbage_tmp, &data->garbage_perm, 127);
 	}
 	execve(path, cmd->args, data->env);
-	perror("execve");
+	perror(cmd->args[0]);
+	if (errno == EACCES || errno == EISDIR)
+		exit(126);
 	exit(127);
 }
 
@@ -66,7 +68,6 @@ void	exec_pipeline(t_data *data, t_cmd *cmd)
 	int		fd[2];
 	int		prev_pipe;
 	pid_t	pid;
-	int		status;
 
 	prev_pipe = -1;
 	while (cmd)
@@ -78,15 +79,15 @@ void	exec_pipeline(t_data *data, t_cmd *cmd)
 		{
 			setup_child_pipes(cmd, fd, prev_pipe);
 			if (handle_redirections(cmd) == 1)
-				my_exit(&data->garbage_tmp, &data->garbage_perm,
-					data->exit_status);
+				my_exit(&data->garbage_tmp, &data->garbage_perm, 1);
+			if (!cmd->args || !cmd->args[0])
+				my_exit(&data->garbage_tmp, &data->garbage_perm, 0);
 			run_cmd(data, cmd);
 		}
 		handle_parent(cmd, fd, &prev_pipe);
 		cmd = cmd->next;
 	}
 	wait_pipeline(data, pid);
-	return ;
 }
 
 void	my_exec(t_data *data)
@@ -94,11 +95,11 @@ void	my_exec(t_data *data)
 	t_cmd	*cmd;
 
 	cmd = data->cmds;
-	if (!cmd || !cmd->args || !cmd->args[0])
+	if (!cmd)
 		return ;
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
-	if (!cmd->next && is_builtin(cmd->args[0]))
+	if (!cmd->next && cmd->args && cmd->args[0] && is_builtin(cmd->args[0]))
 		exec_single_builtin(data, cmd);
 	else
 		exec_pipeline(data, cmd);

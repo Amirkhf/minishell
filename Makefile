@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+         #
+#    By: amary <amary@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/26 09:36:23 by amkhelif          #+#    #+#              #
-#    Updated: 2026/03/24 17:54:33 by amkhelif         ###   ########.fr        #
+#    Updated: 2026/03/26 20:17:51 by amary            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,6 @@ SRC = 	libft/ft_double_str_len.c \
 		libft/ft_strncmp.c \
 		libft/ft_expanded_len.c \
 		libft/ft_strjoin.c \
-		libft/my_itoa.c \
 		srcs/error/error_msg.c \
 		srcs/init/init_struct.c \
 		srcs/init/extract_path.c \
@@ -57,7 +56,10 @@ SRC = 	libft/ft_double_str_len.c \
 		srcs/exec/redirections.c \
 		srcs/exec/wait_pid.c \
 		srcs/exec/exec_single_builtin.c \
-		srcs/exec/signals.c
+		srcs/exec/signals.c \
+		srcs/exec/action_heredoc2.c \
+		libft/ft_itoa.c \
+		srcs/exec/built-ins/export.c \
 
 OBJ = $(SRC:.c=.o)
 

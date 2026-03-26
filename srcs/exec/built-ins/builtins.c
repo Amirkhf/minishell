@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 19:33:01 by amary             #+#    #+#             */
-/*   Updated: 2026/03/24 17:44:14 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/26 20:18:24 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,6 @@ bool	is_builtin(char *cmd_name)
 	return (false);
 }
 
-
-
-
-
 void	exec_builtin(t_data *data, t_cmd *cmd)
 {
 	char	*name;
@@ -45,7 +41,7 @@ void	exec_builtin(t_data *data, t_cmd *cmd)
 	if (ft_strncmp(name, "cd", 3) == 0)
 		ft_cd(data, cmd);
 	else if (ft_strncmp(name, "exit", 5) == 0)
-		ft_exit(data);
+		ft_exit(data, cmd);
 	else if (ft_strncmp(name, "pwd", 4) == 0)
 		ft_pwd();
 	else if (ft_strncmp(name, "echo", 5) == 0) 
@@ -54,4 +50,6 @@ void	exec_builtin(t_data *data, t_cmd *cmd)
 		ft_unset(data,cmd);
 	else if (ft_strncmp(name, "env", 5) == 0) 
 		ft_env(data->env);
+	else if (ft_strncmp(name, "export", 7) == 0) 
+		ft_export(data, cmd);
 }

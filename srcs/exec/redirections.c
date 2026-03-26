@@ -6,41 +6,11 @@
 /*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/20 00:23:57 by amary             #+#    #+#             */
-/*   Updated: 2026/03/25 15:22:06 by amary            ###   ########.fr       */
+/*   Updated: 2026/03/26 19:18:08 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-#include <fcntl.h>
-
-int	action_heredoc2(t_redir *redir)
-{
-	int		fd;
-	char	*line;
-	int		saved_stdout;
-	
-	saved_stdout = dup(STDOUT_FILENO);
-	dup2(STDERR_FILENO, STDOUT_FILENO);
-	fd = open("/tmp/.minishell_heredoc", O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	if (fd == -1)
-		return (-1);
-	while (1)
-	{
-		line = readline("> ");
-		if (!line || (ft_strncmp(line, redir->file, ft_strlen(redir->file)) == 0
-				&& ft_strlen(line) == ft_strlen(redir->file)))
-		{
-			free(line);
-			break ;
-		}
-		write(fd, line, ft_strlen(line));
-		write(fd, "\n", 1);
-		free(line);
-	}
-	close(fd);
-	dup2(saved_stdout, STDOUT_FILENO);
-	return (close(saved_stdout), open("/tmp/.minishell_heredoc", O_RDONLY));
-}
 
 int	action_redirr(t_redir *redir)
 {
