@@ -6,13 +6,13 @@
 #    By: amary <amary@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/26 09:36:23 by amkhelif          #+#    #+#              #
-#    Updated: 2026/03/26 20:33:56 by amary            ###   ########.fr        #
+#    Updated: 2026/03/26 22:20:51 by amary            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = cc
-CFLAGS = -g3 -Wall -Wextra
+CFLAGS = -Wall -Wextra -Werror
 INCLUDES = -I./includes
 LIBS = -lreadline
 
