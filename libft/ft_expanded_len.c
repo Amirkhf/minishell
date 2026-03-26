@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expanded_len.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 16:33:58 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/24 17:49:11 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/26 21:44:37 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,28 +45,23 @@ long long	expanded_len(t_data *data, char *str)
 {
 	int		i;
 	int		len;
-	char	*name_variable;
-	char	*status_str;
+	char	*tmp;
 
-	name_variable = my_malloc(data, ft_strlen(data->line) + 1, TMP);
-	if (!(name_variable))
-		my_exit(&data->garbage_tmp, &data->garbage_perm, EXIT_FAILURE);
-	len = 0;
 	i = 0;
+	len = 0;
 	while (str && str[i])
 	{
 		if (str[i] == '$' && str[i + 1] == '?')
 		{
-			status_str = ft_itoa(data, data->exit_status);
-			len += ft_strlen(status_str);
+			len += ft_strlen(ft_itoa(data, data->exit_status));
 			i += 2;
 			continue ;
 		}
 		if (str[i] == '$')
 		{
-			name_variable = extract_var_name(data, str, &i);
-			if (name_variable)
-				len += len_var_env(data, name_variable);
+			tmp = extract_var_name(data, str, &i);
+			if (tmp)
+				len += len_var_env(data, tmp);
 			continue ;
 		}
 		len++;

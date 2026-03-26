@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 10:26:25 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/23 14:06:21 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/26 21:22:12 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 static int	what_operator(char *str, int *i);
-static void	take_big_operator(t_data *data, int operator, int * i);
-static void	take_small_operator(t_data *data, int operator, int * i);
+static void	take_big_operator(t_data *data, int operator, int *i);
+static void	take_small_operator(t_data *data, int operator, int *i);
 
 t_token	*token_line(t_data *data)
 {
@@ -30,10 +30,10 @@ t_token	*token_line(t_data *data)
 			i++;
 		else if ((what_operator(data->line, &i)) != -1)
 		{
-			operator= what_operator(data->line, &i);
-			if (operator>= HEREDOC && operator<= APPEND)
+			operator = what_operator(data->line, &i);
+			if (operator >= HEREDOC && operator <= APPEND)
 				take_big_operator(data, operator, & i);
-			else if (operator!= 0 && operator!= 1)
+			else if (operator != 0 && operator != 1)
 				take_small_operator(data, operator, & i);
 		}
 		else
@@ -45,7 +45,7 @@ t_token	*token_line(t_data *data)
 	return (data->token);
 }
 
-static int  what_operator(char *str, int *i)
+static int	what_operator(char *str, int *i)
 {
 	if (!(ft_strncmp(str + *i, HEREDOC_C, 2)))
 		return (HEREDOC);
@@ -61,9 +61,9 @@ static int  what_operator(char *str, int *i)
 }
 
 // ajoute a la liste de token si c un >> ou <<
-static void	take_big_operator(t_data *data, int operator, int * i)
+static void	take_big_operator(t_data *data, int operator, int *i)
 {
-	if (operator== HEREDOC)
+	if (operator == HEREDOC)
 	{
 		if (!(add_token(data, &data->token, HEREDOC, "<<")))
 			my_exit(&data->garbage_tmp, &data->garbage_perm, 1);

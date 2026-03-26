@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 16:24:26 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/23 12:45:48 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/26 21:29:04 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,8 @@ int	check_lexer(t_token **token)
 	tmp = *token;
 	if (!(tmp))
 		return (EXIT_FAILURE);
-	
 	if (tmp->type == PIPE)
 		return (syntax_error("|"), EXIT_FAILURE);
-		
 	while (tmp)
 	{
 		if (tmp->type >= PIPE && tmp->type <= APPEND)

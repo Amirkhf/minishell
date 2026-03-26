@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quote_remove.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 12:24:38 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/23 12:48:24 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/26 21:29:41 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static char	*remove_quote_v2(t_data *data, char *str)
 // Parcours les tokens pour retirer les quotes
 void	remove_quote(t_data *data)
 {
-	t_token *tmp;
+	t_token	*tmp;
 
 	tmp = data->token;
 	while (tmp)

@@ -6,7 +6,7 @@
 /*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 12:55:43 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/26 20:39:50 by amary            ###   ########.fr       */
+/*   Updated: 2026/03/26 21:16:23 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	add_to_env(t_data *data, char *arg)
 			return ;
 		}
 	}
-	new = my_malloc(data, sizeof(char *) * (i + 2), PERM); // <-- ICI ON UTILISE PERM
+	new = my_malloc(data, sizeof(char *) * (i + 2), PERM);
 	i = -1;
 	while (data->env[++i])
 		new[i] = data->env[i];

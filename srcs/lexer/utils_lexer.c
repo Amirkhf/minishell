@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_lexer.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 13:45:08 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/24 15:43:14 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/26 21:20:03 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,16 @@ int	take_cmd(t_data *data, int *i)
 
 	j = 0;
 	word = my_malloc(data, ft_strlen(data->line) + 2, TMP);
-	if (!(word))
+	if (!word)
 		my_exit(&data->garbage_tmp, &data->garbage_perm, 1);
 	while (data->line[*i] && !is_operator(data->line + *i))
 	{
 		if (data->line[*i] == DOUBLE_QUOTE_C
 			|| data->line[*i] == SIMPLE_QUOTE_C)
 			take_quote(data, i, &j, word);
-		if (is_space(data->line[*i]))
+		if (is_space(data->line[*i]) || !data->line[*i])
 			break ;
-		word[j] = data->line[*i];
-		if (!data->line[*i])
-			break ;
-		j++;
-		(*i)++;
+		word[j++] = data->line[(*i)++];
 	}
 	word[j] = '\0';
 	if (data->last_token && data->last_token->type != CMD

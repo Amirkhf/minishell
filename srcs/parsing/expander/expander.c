@@ -6,8 +6,20 @@
 /*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 12:43:15 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/26 19:31:14 by amary            ###   ########.fr       */
+/*   Updated: 2026/03/26 21:37:47 by amary            ###   ########.fr       */
 /*                                                                            */
+/* ************************************************************************** */
+
+/* ************************************************************************** */
+/* */
+/* :::      ::::::::   */
+/* expander.c                                         :+:      :+:    :+:   */
+/* +:+ +:+         +:+     */
+/* By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
+/* +#+#+#+#+#+   +#+           */
+/* Created: 2026/03/26 21:00:00 by amary             #+#    #+#             */
+/* Updated: 2026/03/26 21:00:00 by amary            ###   ########.fr       */
+/* */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
@@ -22,7 +34,7 @@ char	*expander(t_data *data)
 	tmp = data->token;
 	while (tmp)
 	{
-		if ((tmp->prev == NULL || tmp->prev->type != HEREDOC)
+		if ((!tmp->prev || tmp->prev->type != HEREDOC)
 			&& is_variable_env(tmp->str) == EXIT_SUCCESS)
 		{
 			tmp->str = expand_word(data, tmp->str);
@@ -32,111 +44,84 @@ char	*expander(t_data *data)
 	return (NULL);
 }
 
-static char	*expand_word(t_data *data, char *str)
+int	copy_env_value(t_data *data, char *new_str, int *j, char *var)
 {
-	int		i;
-	int		a;
-	int		j;
-	char	*new_str;
-
-	i = 0;
-	a = 0;
-	j = 0;
-	new_str = my_malloc(data, expanded_len(data, str) + 1, TMP);
-	if (!new_str)
-		return (NULL);
-	while (str[i])
-	{
-		if (str[i] == '$' && !(is_simple_quote(str, i)))
-		{
-			if (str[i + 1] == '?')
-			{
-				expand_exit_status(data, new_str, &i, &j);
-				continue ;
-			}
-			a = i;
-			copy_env_value(data, new_str, &i, &j, extract_var_name(data, str, &a));
-			continue ;
-		}
-		new_str[j++] = str[i++];
-	}
-	return (new_str[j] = '\0', new_str);
-}
-
-void	copy_env_value(t_data *data, char *new_str, int *i, int *j,
-		char *name_variable)
-{
+	int	len;
 	int	a;
 	int	b;
 
-	b = 0;
-	a = 0;
-	while (data->env[a])
+	len = ft_strlen(var);
+	a = -1;
+	while (data->env[++a])
 	{
-		if (ft_strncmp(data->env[a], name_variable,
-				ft_strlen(name_variable)) == 0
-			&& data->env[a][ft_strlen(name_variable)] == '=')
+		if (ft_strncmp(data->env[a], var, len) == 0
+			&& data->env[a][len] == '=')
 		{
-			b += ft_strlen(name_variable) + 1;
+			b = len + 1;
 			while (data->env[a][b])
-			{
-				new_str[*j] = data->env[a][b];
-				(*j)++;
-				b++;
-			}
+				new_str[(*j)++] = data->env[a][b++];
 			break ;
 		}
-		a++;
 	}
-	(*i) += ft_strlen(name_variable) + 1;
+	return (len + 1);
 }
 
-void	copy_name_variable(t_data *data, int *j, char *name_variable)
+static void	expand_exit_status(t_data *data, char *nstr, int *i, int *j)
 {
-	int	a;
+	char	*status_str;
+	int		k;
 
-	a = 0;
-	while (name_variable[a])
-	{
-		data->new_line[*j] = name_variable[a];
-		(*j)++;
-		a++;
-	}
+	status_str = ft_itoa(data, data->exit_status);
+	k = -1;
+	while (status_str[++k])
+		nstr[(*j)++] = status_str[k];
+	(*i) += 2;
 }
 
-//  verifier si le $ est entre des simple quote
 int	is_simple_quote(char *str, int index_dollar)
 {
 	int	j;
-	int	in_single_quote;
-	int	in_double_quote;
+	int	in_single;
+	int	in_double;
 
-	j = 0;
-	in_single_quote = 0;
-	in_double_quote = 0;
-	while (j < index_dollar)
+	j = -1;
+	in_single = 0;
+	in_double = 0;
+	while (++j < index_dollar)
 	{
-		if (str[j] == '\'' && in_double_quote == 0)
-			in_single_quote = !in_single_quote;
-		else if (str[j] == '"' && in_single_quote == 0)
-			in_double_quote = !in_double_quote;
-		j++;
+		if (str[j] == '\'' && in_double == 0)
+			in_single = !in_single;
+		else if (str[j] == '"' && in_single == 0)
+			in_double = !in_double;
 	}
-	return (in_single_quote);
+	return (in_single);
 }
 
-static void	expand_exit_status(t_data *data, char *new_str, int *i, int *j)
+static char	*expand_word(t_data *data, char *str)
 {
-	char *status_str;
-	int k;
+	int		i;
+	int		j;
+	int		a;
+	char	*nstr;
 
-	status_str = ft_itoa(data, data->exit_status);
-	k = 0;
-	while (status_str[k])
+	i = 0;
+	j = 0;
+	nstr = my_malloc(data, expanded_len(data, str) + 1, TMP);
+	if (!nstr)
+		return (NULL);
+	while (str[i])
 	{
-		new_str[*j] = status_str[k];
-		(*j)++;
-		k++;
+		if (str[i] == '$' && !is_simple_quote(str, i) && str[i + 1] == '?')
+			expand_exit_status(data, nstr, &i, &j);
+		else if (str[i] == '$' && !is_simple_quote(str, i))
+		{
+			a = i;
+			i += copy_env_value(data, nstr, &j,
+					extract_var_name(data, str, &a));
+		}
+		else
+			nstr[j++] = str[i++];
 	}
-	(*i) += 2;
+	nstr[j] = '\0';
+	return (nstr);
 }

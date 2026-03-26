@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   poubelle.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 17:10:49 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/10 17:33:31 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/26 21:41:26 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	print_token(t_data *data)
 	printf("\n=== LISTE DES TOKENS ===\n");
 	while (tmp)
 	{
-		// Le %-15s permet d'aligner le texte pour que ce soit joli à lire
 		printf("Valeur : [%s] | Type : %s\n", tmp->str,
 			get_type_name(tmp->type));
 		tmp = tmp->next;
@@ -61,7 +60,7 @@ void	print_double_tab(char **str)
 			printf("%c", str[i][j]);
 			j++;
 		}
-		printf("%d \n",i);
+		printf("%d \n", i);
 		i++;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 12:08:05 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/10 15:17:50 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/26 21:46:49 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,3 @@ size_t	ft_strlen(const char *s)
 		i++;
 	return (i);
 }
-// int main (void)
-// {
-// 	char str[100] = "test de la f";
-// 	printf("%ld",ft_strlen(str));
-// } 
-
-
-//fkmflf

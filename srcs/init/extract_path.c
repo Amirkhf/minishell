@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   extract_path.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 12:28:39 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/10 14:21:13 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/26 21:17:18 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 static void	fill_my_env(t_data *data, char **env);
-// extract the path from the env variable
+
 char	**extract_env(t_data *data, char **env)
 {
 	int	len;

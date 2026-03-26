@@ -6,7 +6,7 @@
 /*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 19:33:01 by amary             #+#    #+#             */
-/*   Updated: 2026/03/26 20:36:56 by amary            ###   ########.fr       */
+/*   Updated: 2026/03/26 21:11:58 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	exec_builtin(t_data *data, t_cmd *cmd)
 		ft_exit(data, cmd);
 	else if (ft_strncmp(name, "pwd", 4) == 0)
 		ft_pwd();
-	else if (ft_strncmp(name, "echo", 5) == 0) 
+	else if (ft_strncmp(name, "echo", 5) == 0)
 		my_echo(data, cmd);
 	else if (ft_strncmp(name, "unset", 6) == 0)
 		ft_unset(data, cmd);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 16:23:15 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/16 11:57:42 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/26 21:30:03 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	is_variable_env(char *str)
 		if (str[i] == '$' && str[i + 1] != '\0')
 		{
 			if (ft_isalpha(str[i + 1]) || str[i + 1] == '_' || str[i
-				+ 1] == '?')
+					+ 1] == '?')
 				return (EXIT_SUCCESS);
 		}
 		i++;

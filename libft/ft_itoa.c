@@ -6,11 +6,12 @@
 /*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 15:48:05 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/26 19:29:38 by amary            ###   ########.fr       */
+/*   Updated: 2026/03/26 21:42:46 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
 int	count_digit(long n)
 {
 	int	count;

@@ -6,7 +6,7 @@
 /*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 19:14:04 by amary             #+#    #+#             */
-/*   Updated: 2026/03/26 20:02:35 by amary            ###   ########.fr       */
+/*   Updated: 2026/03/26 21:04:22 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	run_cmd(t_data *data, t_cmd *cmd)
 	if (is_builtin(cmd->args[0]))
 	{
 		exec_builtin(data, cmd);
-		my_exit(data->garbage_tmp, data->garbage_perm,data->exit_status);
+		my_exit(data->garbage_tmp, data->garbage_perm, data->exit_status);
 	}
 	path = get_cmd_path(data, cmd->args[0]);
 	if (!path)

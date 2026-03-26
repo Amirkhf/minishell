@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amkhelif <amkhelif@learner.42.tech>        +#+  +:+       +#+        */
+/*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 12:02:52 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/26 12:02:53 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/26 21:16:07 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-
-static int	is_valid_name(char *str)
+int	is_valid_name(char *str)
 {
 	int	i;
 
@@ -48,12 +47,12 @@ void	ft_unset(t_data *data, t_cmd *cmd)
 	while (cmd->args[i])
 	{
 		if (!is_valid_name(cmd->args[i]))
-			break;
+			break ;
 		else
 		{
 			j = 0;
 			len = ft_strlen(cmd->args[i]);
-			while (data->env[j])
+			while (data->env[j++])
 			{
 				if (ft_strncmp(data->env[j], cmd->args[i], len) == 0
 					&& (data->env[j][len] == '=' || data->env[j][len] == '\0'))
@@ -61,7 +60,6 @@ void	ft_unset(t_data *data, t_cmd *cmd)
 					remove_env_var(data, j);
 					break ;
 				}
-				j++;
 			}
 		}
 		i++;
