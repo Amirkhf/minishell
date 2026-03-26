@@ -6,7 +6,7 @@
 /*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 14:11:04 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/26 21:42:29 by amary            ###   ########.fr       */
+/*   Updated: 2026/03/26 22:13:08 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	token_add_back(t_data *data, t_token **head, t_token *new)
 {
 	t_token	*tmp;
 
+	(void)data;
 	if (!new)
 		return ;
 	if (!*head)

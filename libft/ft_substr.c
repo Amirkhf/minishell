@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 16:26:43 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/09 16:27:00 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/26 22:16:35 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ static size_t	true_len(char const *s, unsigned int start, size_t len)
 	return (len);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, int start, size_t len)
 {
 	char			*str;
 	size_t			i;
-	unsigned int	len_s;
+	int				len_s;
 
-	if (!s || (len < 0))
+	if (!s)
 		return (NULL);
 	len_s = ft_strlen(s);
 	i = 0;

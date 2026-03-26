@@ -6,7 +6,7 @@
 /*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 08:29:06 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/26 21:49:25 by amary            ###   ########.fr       */
+/*   Updated: 2026/03/26 22:16:54 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ int			is_double_quote(char *str);
 int			is_variable_env(char *str);
 char		**ft_split(t_data *data, char const *s, char c);
 char		*ft_strdup(t_data *data, const char *s);
-char		*ft_substr(char const *s, unsigned int start, size_t len);
+char		*ft_substr(char const *s, int start, size_t len);
 char		*ft_strjoin(t_data *data, char const *s1, char const *s2);
 int			parsing(t_data *data, t_token **token);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);

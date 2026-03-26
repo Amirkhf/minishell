@@ -6,7 +6,7 @@
 /*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 08:27:35 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/26 21:22:32 by amary            ###   ########.fr       */
+/*   Updated: 2026/03/26 22:18:19 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ int	main(int argc, char **argv, char **env)
 {
 	t_data	data;
 
-	argc = 0;
-	argv = NULL;
+	(void)argc;
+	(void)argv;
 	if (init_struct(&data, env))
 		return (EXIT_FAILURE);
 	loop(&data);
