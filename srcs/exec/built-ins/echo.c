@@ -12,14 +12,13 @@
 
 #include "../../../includes/minishell.h"
 
-
-static bool check_option_n(char *line);
+bool check_option_n(char *line);
 
 
 
 void my_echo(t_data *data, t_cmd *cmd)
 {
-int		i;
+	int		i;
 	bool	print_newline;
 
 	i = 1; 
@@ -41,7 +40,7 @@ int		i;
 
 }
 
-static bool check_option_n(char *line)
+bool check_option_n(char *line)
 {
     int i;
 

@@ -22,6 +22,10 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
+# include <signal.h>
+# include <sys/wait.h>
+# include <sys/types.h>
+
 
 # define TMP 0
 # define PERM 1
@@ -154,8 +158,12 @@ bool					is_builtin(char *cmd_name);
 void					ft_cd(t_data *data, t_cmd *cmd);
 void					ft_exit(t_data *data);
 void					exec_builtin(t_data *data, t_cmd *cmd);
-void					handle_redirections(t_cmd *cmd);
-void					action_redird(int fd, t_redir *redir);
-void					action_redirr(int fd, t_redir *redir);
-void					action_HEREDOC(int fd, t_redir *redir);
+int						handle_redirections(t_cmd *cmd);
+int						action_redird(t_redir *redir);
+int						action_redirr(t_redir *redir);
+int						action_heredoc(t_redir *redir);
+void    				wait_pipeline(t_data *data, pid_t pid);
+void    				exec_single_builtin(t_data *data, t_cmd *cmd);
+void		    		setup_signals(void);
+void					exec_single_builtin(t_data *data, t_cmd *cmd);
 #endif

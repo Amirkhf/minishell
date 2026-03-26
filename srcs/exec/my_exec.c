@@ -54,7 +54,7 @@ void	run_cmd(t_data *data, t_cmd *cmd)
 	if (!path)
 	{
 		write(2, "minishell: command not found\n", 29);
-		my_exit(data->garbage_tmp, data->garbage_perm, 127);
+		my_exit(&data->garbage_tmp, &data->garbage_perm, 127);
 	}
 	execve(path, cmd->args, data->env);
 	perror("execve");
@@ -78,7 +78,7 @@ void	exec_pipeline(t_data *data, t_cmd *cmd)
 		{
 			setup_child_pipes(cmd, fd, prev_pipe);
 			if (handle_redirections(cmd) == 1)
-				my_exit(data->garbage_tmp, data->garbage_perm,
+				my_exit(&data->garbage_tmp, &data->garbage_perm,
 					data->exit_status);
 			run_cmd(data, cmd);
 		}

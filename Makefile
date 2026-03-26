@@ -54,7 +54,10 @@ SRC = 	libft/ft_double_str_len.c \
 		srcs/exec/built-ins/cd.c \
 		srcs/exec/built-ins/exit.c \
 		srcs/exec/built-ins/export.c \
-		srcs/exec/redirections.c
+		srcs/exec/redirections.c \
+		srcs/exec/wait_pid.c \
+		srcs/exec/exec_single_builtin.c \
+		srcs/exec/signals.c
 
 OBJ = $(SRC:.c=.o)
 
