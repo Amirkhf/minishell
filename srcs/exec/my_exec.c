@@ -3,52 +3,104 @@
 /*                                                        :::      ::::::::   */
 /*   my_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 19:14:04 by amary             #+#    #+#             */
-/*   Updated: 2026/03/24 15:56:53 by amkhelif         ###   ########.fr       */
+/*   Updated: 2026/03/25 14:24:57 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-#include <sys/wait.h>
 
-void	exec_simple_cmd(t_data *data, t_cmd *cmd)
+void	setup_child_pipes(t_cmd *cmd, int *fd, int prev_pipe)
 {
-	pid_t	pid;
-	char	*cmd_path;
+	if (prev_pipe != -1)
+	{
+		dup2(prev_pipe, STDIN_FILENO);
+		close(prev_pipe);
+	}
+	if (cmd->next)
+	{
+		dup2(fd[1], STDOUT_FILENO);
+		close(fd[0]);
+		close(fd[1]);
+	}
+	return ;
+}
 
-	cmd_path = get_cmd_path(data, cmd->args[0]);
-	if (!cmd_path)
+void	handle_parent(t_cmd *cmd, int *fd, int *prev_pipe)
+{
+	if (*prev_pipe != -1)
+		close(*prev_pipe);
+	if (cmd->next)
+	{
+		close(fd[1]);
+		*prev_pipe = fd[0];
+	}
+}
+
+void	run_cmd(t_data *data, t_cmd *cmd)
+{
+	char	*path;
+
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
+	if (is_builtin(cmd->args[0]))
+	{
+		exec_builtin(data, cmd);
+		exit(0);
+	}
+	path = get_cmd_path(data, cmd->args[0]);
+	if (!path)
 	{
 		write(2, "minishell: command not found\n", 29);
-		return ;
+		my_exit(data->garbage_tmp, data->garbage_perm, 127);
 	}
-	pid = fork();
-	if (pid == -1)
+	execve(path, cmd->args, data->env);
+	perror("execve");
+	exit(127);
+}
+
+void	exec_pipeline(t_data *data, t_cmd *cmd)
+{
+	int		fd[2];
+	int		prev_pipe;
+	pid_t	pid;
+	int		status;
+
+	prev_pipe = -1;
+	while (cmd)
 	{
-		perror("fork");
-		return ;
+		if (cmd->next)
+			pipe(fd);
+		pid = fork();
+		if (pid == 0)
+		{
+			setup_child_pipes(cmd, fd, prev_pipe);
+			if (handle_redirections(cmd) == 1)
+				my_exit(data->garbage_tmp, data->garbage_perm,
+					data->exit_status);
+			run_cmd(data, cmd);
+		}
+		handle_parent(cmd, fd, &prev_pipe);
+		cmd = cmd->next;
 	}
-	if (pid == 0)
-	{
-		handle_redirections(cmd);
-		execve(cmd_path, cmd->args, data->env);
-		perror("execve");
-		exit(127);
-	}
-	waitpid(pid, NULL, 0);
+	wait_pipeline(data, pid);
 	return ;
 }
 
 void	my_exec(t_data *data)
 {
-	if (!data->cmds || !data->cmds->args || !data->cmds->args[0])
-		my_exit(&data->garbage_tmp, &data->garbage_perm, EXIT_FAILURE);
-	else if (!data->cmds->next && is_builtin(data->cmds->args[0]))
-	{
-		exec_builtin(data, data->cmds);
+	t_cmd	*cmd;
+
+	cmd = data->cmds;
+	if (!cmd || !cmd->args || !cmd->args[0])
 		return ;
-	}
-	exec_simple_cmd(data, data->cmds);
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
+	if (!cmd->next && is_builtin(cmd->args[0]))
+		exec_single_builtin(data, cmd);
+	else
+		exec_pipeline(data, cmd);
+	setup_signals();
 }
