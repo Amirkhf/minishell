@@ -38,6 +38,7 @@ SRC = 	libft/ft_double_str_len.c \
 		srcs/memory/free.c \
 		srcs/memory/garbage.c \
 		srcs/parsing/parsing.c \
+		srcs/exec/build-ins/echo.c \
 		srcs/parsing/quote_remove.c \
 		srcs/parsing/utils.c \
 		srcs/parsing/expander/expander.c \
@@ -49,11 +50,6 @@ SRC = 	libft/ft_double_str_len.c \
 		srcs/exec/built-ins/pwd.c \
 		srcs/exec/built-ins/env.c \
 		srcs/exec/built-ins/builtins.c \
-		srcs/exec/built-ins/unset.c \
-		srcs/exec/built-ins/echo.c \
-		srcs/exec/built-ins/cd.c \
-		srcs/exec/built-ins/exit.c \
-		srcs/exec/built-ins/export.c \
 		srcs/exec/redirections.c
 
 OBJ = $(SRC:.c=.o)

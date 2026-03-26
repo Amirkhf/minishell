@@ -1,32 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amkhelif <amkhelif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/10 12:08:05 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/10 15:17:50 by amkhelif         ###   ########.fr       */
+/*   Created: 2026/03/24 16:15:52 by amkhelif          #+#    #+#             */
+/*   Updated: 2026/03/24 17:42:38 by amkhelif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
-// Calcule la longueur d'une chaîne
-size_t	ft_strlen(const char *s)
+
+static bool check_option_n(char *line);
+
+
+
+
+
+static bool check_option_n(char *line)
 {
-	size_t	i;
+    int i;
 
-	i = 0;
-	while (s && s[i])
-		i++;
-	return (i);
+    if (!line || line[0] != '-' || line[1] == '\0')
+        return (false);
+    i = 1;
+    while (line[i])
+    {
+        if (line[i] != 'n')
+            return (false);
+        i++;
+    }
+    return (true);
 }
-// int main (void)
-// {
-// 	char str[100] = "test de la f";
-// 	printf("%ld",ft_strlen(str));
-// } 
-
-
-l

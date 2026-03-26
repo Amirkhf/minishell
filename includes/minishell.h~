@@ -96,7 +96,7 @@ char					**extract_env(t_data *data, char **env);
 void					*my_malloc(t_data *data, size_t size, bool type);
 void					gc_add(t_garbage **lst, void *data);
 void					free_all(t_garbage **gc);
-void	ft_unset(t_data *data, t_cmd *cmd);
+void	ft_unset(t_data *data, t_cmd *cmd)
 void					my_exit(t_garbage **gc_tmp, t_garbage **gc_perm,
 							int exit_status);
 							void my_echo(t_data *data, t_cmd *cmd);

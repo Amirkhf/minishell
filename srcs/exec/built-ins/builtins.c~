@@ -50,8 +50,4 @@ void	exec_builtin(t_data *data, t_cmd *cmd)
 		ft_pwd();
 	else if (ft_strncmp(name, "echo", 5) == 0) 
 		my_echo(data,cmd);
-	else if (ft_strncmp(name, "unset", 5) == 0) 
-		ft_unset(data,cmd);
-	else if (ft_strncmp(name, "env", 5) == 0) 
-		ft_env(data->env);
 }
