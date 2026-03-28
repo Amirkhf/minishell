@@ -6,7 +6,7 @@
 #    By: amary <amary@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/26 09:36:23 by amkhelif          #+#    #+#              #
-#    Updated: 2026/03/26 22:20:51 by amary            ###   ########.fr        #
+#    Updated: 2026/03/28 17:31:58 by amary            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ SRC = 	libft/ft_double_str_len.c \
 		srcs/exec/signals.c \
 		srcs/exec/action_heredoc2.c \
 		libft/ft_itoa.c \
+		srcs/exec/to_many_arg.c \
 
 OBJ = $(SRC:.c=.o)
 

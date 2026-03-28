@@ -6,7 +6,7 @@
 /*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 12:00:55 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/26 20:48:50 by amary            ###   ########.fr       */
+/*   Updated: 2026/03/28 17:37:36 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void	ft_cd(t_data *data, t_cmd *cmd)
 	}
 	else
 		path = cmd->args[1];
+	if (to_many_arg(data, cmd) == 1)
+		return ;
 	if (chdir(path) != 0)
 	{
 		perror("minishell: cd");

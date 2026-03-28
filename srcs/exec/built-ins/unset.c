@@ -6,7 +6,7 @@
 /*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 12:02:52 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/26 21:16:07 by amary            ###   ########.fr       */
+/*   Updated: 2026/03/28 17:40:17 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	ft_unset(t_data *data, t_cmd *cmd)
 	int	j;
 	int	len;
 
-	i = 1;
-	while (cmd->args[i])
+	i = 0;
+	while (cmd->args[++i])
 	{
 		if (!is_valid_name(cmd->args[i]))
 			break ;
@@ -52,7 +52,7 @@ void	ft_unset(t_data *data, t_cmd *cmd)
 		{
 			j = 0;
 			len = ft_strlen(cmd->args[i]);
-			while (data->env[j++])
+			while (data->env[j])
 			{
 				if (ft_strncmp(data->env[j], cmd->args[i], len) == 0
 					&& (data->env[j][len] == '=' || data->env[j][len] == '\0'))
@@ -60,8 +60,8 @@ void	ft_unset(t_data *data, t_cmd *cmd)
 					remove_env_var(data, j);
 					break ;
 				}
+				j++;
 			}
 		}
-		i++;
 	}
 }

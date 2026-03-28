@@ -6,7 +6,7 @@
 /*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 08:29:06 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/26 22:16:54 by amary            ###   ########.fr       */
+/*   Updated: 2026/03/28 17:31:45 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,5 +161,6 @@ void		setup_signals(void);
 void		heredoc_child(int fd, t_redir *redir);
 int			action_heredoc2(t_redir *redir);
 void		ft_export(t_data *data, t_cmd *cmd);
+int			to_many_arg(t_data *data, t_cmd *cmd);
 
 #endif
