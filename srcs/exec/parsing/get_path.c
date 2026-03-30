@@ -62,6 +62,8 @@ char	*get_cmd_path(t_data *data, char *cmd_name)
 	char	**paths;
 	char	*tmp;
 
+	if (!cmd_name || cmd_name[0] == '\0')
+		return (NULL);
 	tmp = check(cmd_name, data->env);
 	if (tmp)
 		return (tmp);
