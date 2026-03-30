@@ -29,9 +29,7 @@ char	*expander(t_data *data)
 		{
 			expanded_str = expand_word(data, tmp->str);
 			if (ft_strchr(expanded_str, ' ') && !is_in_quotes(tmp->str))
-			{
 				retokenize_expanded_str(data, &tmp, expanded_str);
-			}
 			else
 				tmp->str = expanded_str;
 		}

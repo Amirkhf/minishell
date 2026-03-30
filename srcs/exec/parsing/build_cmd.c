@@ -87,12 +87,12 @@ void	fill_cmd(t_data *data, t_cmd *cmd, t_token **tok_cpy)
 			*tok_cpy = (*tok_cpy)->next->next;
 			continue ;
 		}
-		cmd->args[i++] = (*tok_cpy)->str;
+		if ((*tok_cpy)->str != NULL)
+			cmd->args[i++] = (*tok_cpy)->str;
 		*tok_cpy = (*tok_cpy)->next;
 	}
 	cmd->args[i] = NULL;
 }
-
 void	build_cmds(t_data *data)
 {
 	t_token	*tok_cpy;

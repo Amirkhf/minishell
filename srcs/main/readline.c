@@ -46,24 +46,15 @@ static int	count_quote(char *str)
 	bool	double_quote;
 
 	init_variable(&i, &simple_quote, &double_quote);
-	while (str[i++])
+	while (str && str[i])
 	{
-		if (double_quote || simple_quote)
-		{
-			if (str[i] == DOUBLE_QUOTE_C && simple_quote == false)
-				double_quote = 0;
-			else if (str[i] == SIMPLE_QUOTE_C && double_quote == false)
-				simple_quote = 0;
-		}
-		else
-		{
-			if (str[i] == SIMPLE_QUOTE_C && double_quote == false)
-				simple_quote = 1;
-			else if (str[i] == DOUBLE_QUOTE_C && simple_quote == false)
-				double_quote = 1;
-		}
+		if (str[i] == SIMPLE_QUOTE_C && !double_quote)
+			simple_quote = !simple_quote;
+		else if (str[i] == DOUBLE_QUOTE_C && !simple_quote)
+			double_quote = !double_quote;
+		i++;
 	}
-	if (double_quote == true || simple_quote == true)
+	if (double_quote || simple_quote)
 		return (1);
 	return (0);
 }

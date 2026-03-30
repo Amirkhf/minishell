@@ -28,7 +28,10 @@ int	take_cmd(t_data *data, int *i)
 	{
 		if (data->line[*i] == DOUBLE_QUOTE_C
 			|| data->line[*i] == SIMPLE_QUOTE_C)
-			take_quote(data, i, &j, word);
+			{
+				take_quote(data, i, &j, word);
+				continue ;
+			}
 		if (is_space(data->line[*i]) || !data->line[*i])
 			break ;
 		word[j++] = data->line[(*i)++];
@@ -44,15 +47,15 @@ int	take_cmd(t_data *data, int *i)
 
 bool	is_operator(char *line)
 {
-	if (!(strncmp(line, HEREDOC_C, (long unsigned int)2)))
+	if (!(ft_strncmp(line, HEREDOC_C, (long unsigned int)2)))
 		return (1);
-	else if (!(strncmp(line, APPEND_C, (long unsigned int)2)))
+	else if (!(ft_strncmp(line, APPEND_C, (long unsigned int)2)))
 		return (1);
-	else if (!(strncmp(line, PIPE_C, (long unsigned int)1)))
+	else if (!(ft_strncmp(line, PIPE_C, (long unsigned int)1)))
 		return (1);
-	else if (!(strncmp(line, REDIR_IN_C, (long unsigned int)1)))
+	else if (!(ft_strncmp(line, REDIR_IN_C, (long unsigned int)1)))
 		return (1);
-	else if (!(strncmp(line, REDIR_OUT_C, (long unsigned int)1)))
+	else if (!(ft_strncmp(line, REDIR_OUT_C, (long unsigned int)1)))
 		return (1);
 	return (0);
 }

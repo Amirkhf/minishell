@@ -44,6 +44,8 @@ int	main(int argc, char **argv, char **env)
 
 	(void)argc;
 	(void)argv;
+	if (env[0] == NULL)
+		return (EXIT_FAILURE);
 	if (init_struct(&data, env))
 		return (EXIT_FAILURE);
 	loop(&data);
