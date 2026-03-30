@@ -27,6 +27,7 @@ SRC = 	libft/ft_double_str_len.c \
 		libft/ft_strncmp.c \
 		libft/ft_expanded_len.c \
 		libft/ft_strjoin.c \
+		libft/ft_strchr.c \
 		srcs/error/error_msg.c \
 		srcs/init/init_struct.c \
 		srcs/init/extract_path.c \

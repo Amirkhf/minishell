@@ -111,6 +111,7 @@ int			take_cmd(t_data *data, int *i);
 bool		add_token(t_data *data, t_token **t_lst, t_token_type type,
 				char *val);
 bool		is_operator(char *line);
+char	*ft_strchr(const char *s, int c);
 bool		is_space(char c);
 char		*expander(t_data *data);
 char		*extract_var_name(t_data *data, char *str, int *i);
@@ -162,5 +163,7 @@ void		heredoc_child(int fd, t_redir *redir);
 int			action_heredoc2(t_redir *redir);
 void		ft_export(t_data *data, t_cmd *cmd);
 int			to_many_arg(t_data *data, t_cmd *cmd);
+void		retokenize_expanded_str(t_data *data, t_token **token, char *str);
+int			is_in_quotes(char *str);
 
 #endif
