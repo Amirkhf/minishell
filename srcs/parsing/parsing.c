@@ -6,7 +6,7 @@
 /*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 16:24:26 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/26 21:29:04 by amary            ###   ########.fr       */
+/*   Updated: 2026/03/30 17:16:52 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,24 +27,20 @@ int	check_lexer(t_token **token)
 	t_token	*tmp;
 
 	tmp = *token;
-	if (!(tmp))
+	if (!tmp)
 		return (EXIT_FAILURE);
 	if (tmp->type == PIPE)
 		return (syntax_error("|"), EXIT_FAILURE);
 	while (tmp)
 	{
-		if (tmp->type == PIPE)
+		if (tmp->type >= PIPE && tmp->type <= APPEND)
 		{
-			if (tmp->next == NULL)
+			if (!tmp->next)
 				return (syntax_error("newline"), EXIT_FAILURE);
-			if (tmp->next->type == PIPE)
-				return (syntax_error(tmp->next->str), EXIT_FAILURE);
-		}
-		else if (tmp->type >= REDIR_IN && tmp->type <= APPEND)
-		{
-			if (tmp->next == NULL)
-				return (syntax_error("newline"), EXIT_FAILURE);
-			if (tmp->next->type >= PIPE && tmp->next->type <= APPEND)
+			if (tmp->type == PIPE && tmp->next->type == PIPE)
+				return (syntax_error("|"), EXIT_FAILURE);
+			if (tmp->type > PIPE && tmp->next->type >= PIPE
+				&& tmp->next->type <= APPEND)
 				return (syntax_error(tmp->next->str), EXIT_FAILURE);
 		}
 		tmp = tmp->next;

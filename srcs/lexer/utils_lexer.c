@@ -6,7 +6,7 @@
 /*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 13:45:08 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/26 21:20:03 by amary            ###   ########.fr       */
+/*   Updated: 2026/03/30 17:20:43 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,22 @@
 
 static char	*take_quote(t_data *data, int *i, int *j, char *word);
 
-// Extrait un mot de la ligne
 int	take_cmd(t_data *data, int *i)
 {
 	char	*word;
 	int		j;
 
 	j = 0;
-	word = my_malloc(data, ft_strlen(data->line) + 2, TMP);
+	word = my_malloc(data, ft_strlen(data->line + *i) + 1, TMP);
 	if (!word)
 		my_exit(&data->garbage_tmp, &data->garbage_perm, 1);
-	while (data->line[*i] && !is_operator(data->line + *i))
+	while (data->line[*i] && !is_operator(data->line + *i)
+		&& !is_space(data->line[*i]))
 	{
-		if (data->line[*i] == DOUBLE_QUOTE_C
-			|| data->line[*i] == SIMPLE_QUOTE_C)
-			{
-				take_quote(data, i, &j, word);
-				continue ;
-			}
-		if (is_space(data->line[*i]) || !data->line[*i])
-			break ;
-		word[j++] = data->line[(*i)++];
+		if (data->line[*i] == '"' || data->line[*i] == '\'')
+			take_quote(data, i, &j, word);
+		else
+			word[j++] = data->line[(*i)++];
 	}
 	word[j] = '\0';
 	if (data->last_token && data->last_token->type != CMD
@@ -60,7 +55,6 @@ bool	is_operator(char *line)
 	return (0);
 }
 
-// recupere a partir de linput tout le texte entre les quote
 static char	*take_quote(t_data *data, int *i, int *j, char *word)
 {
 	char	quote;
@@ -80,7 +74,6 @@ static char	*take_quote(t_data *data, int *i, int *j, char *word)
 	return (word);
 }
 
-// Ajoute un token à la liste
 bool	add_token(t_data *data, t_token **token_lst, t_token_type type,
 		char *value)
 {

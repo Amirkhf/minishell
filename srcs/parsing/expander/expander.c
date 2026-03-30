@@ -6,10 +6,9 @@
 /*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 12:43:15 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/26 21:37:47 by amary            ###   ########.fr       */
+/*   Updated: 2026/03/30 17:16:24 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../../../includes/minishell.h"
 
@@ -118,57 +117,4 @@ static char	*expand_word(t_data *data, char *str)
 	}
 	nstr[j] = '\0';
 	return (nstr);
-}
-
-void	retokenize_expanded_str(t_data *data, t_token **token, char *str)
-{
-	char	**split_str;
-	t_token	*new_token;
-	t_token	*current;
-	int		i;
-
-	split_str = ft_split(data, str, ' ');
-	if (!split_str)
-		return ;
-	(*token)->str = split_str[0];
-	current = *token;
-	i = 1;
-	while (split_str[i])
-	{
-		new_token = my_malloc(data, sizeof(t_token), TMP);
-		if (!new_token)
-			return ;
-		new_token->str = split_str[i];
-		new_token->type = 3;
-		new_token->next = current->next;
-		new_token->prev = current;
-		if (current->next)
-			current->next->prev = new_token;
-		current->next = new_token;
-		current = new_token;
-		i++;
-	}
-	*token = current;
-}
-
-int	is_in_quotes(char *str)
-{
-	int	i;
-	int	in_single;
-	int	in_double;
-
-	i = 0;
-	in_single = 0;
-	in_double = 0;
-	while (str[i])
-	{
-		if (str[i] == '\'' && in_double == 0)
-			in_single = !in_single;
-		else if (str[i] == '"' && in_single == 0)
-			in_double = !in_double;
-		i++;
-	}
-	if (in_single || in_double)
-		return (1);
-	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:54:20 by amary             #+#    #+#             */
-/*   Updated: 2026/03/26 19:30:27 by amary            ###   ########.fr       */
+/*   Updated: 2026/03/30 17:18:54 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,31 +56,26 @@ char	*check(char *cmd_name, char **env)
 
 char	*get_cmd_path(t_data *data, char *cmd_name)
 {
-	int		j;
-	char	*env_path;
-	char	*cmd_path;
 	char	**paths;
 	char	*tmp;
+	char	*cmd_path;
+	int		j;
 
-	if (!cmd_name || cmd_name[0] == '\0')
+	if (!cmd_name || !*cmd_name)
 		return (NULL);
-	tmp = check(cmd_name, data->env);
-	if (tmp)
-		return (tmp);
-	env_path = get_env_path(data->env, "PATH");
-	if (!env_path)
+	if (check(cmd_name, data->env))
+		return (cmd_name);
+	tmp = get_env_path(data->env, "PATH");
+	if (!tmp || !data)
 		return (NULL);
-	paths = ft_split(data, env_path, ':');
-	if (!paths)
-		return (NULL);
-	j = 0;
-	while (paths[j])
+	paths = ft_split(data, tmp, ':');
+	j = -1;
+	while (paths && paths[++j])
 	{
 		tmp = ft_strjoin(data, paths[j], "/");
 		cmd_path = ft_strjoin(data, tmp, cmd_name);
 		if (cmd_path && access(cmd_path, X_OK) == 0)
 			return (cmd_path);
-		j++;
 	}
 	return (NULL);
 }

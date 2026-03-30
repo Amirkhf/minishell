@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   is_in_quotes.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/30 17:17:50 by amary             #+#    #+#             */
-/*   Updated: 2026/03/30 17:17:58 by amary            ###   ########.fr       */
+/*   Created: 2026/03/30 17:15:19 by amary             #+#    #+#             */
+/*   Updated: 2026/03/30 17:15:38 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
-char	*ft_strchr(const char *s, int c)
+int	is_in_quotes(char *str)
 {
 	int	i;
+	int	in_single;
+	int	in_double;
 
 	i = 0;
-	while (s[i])
+	in_single = 0;
+	in_double = 0;
+	while (str[i])
 	{
-		if (s[i] == (unsigned char)c)
-			return ((char *)(&s[i]));
+		if (str[i] == '\'' && in_double == 0)
+			in_single = !in_single;
+		else if (str[i] == '"' && in_single == 0)
+			in_double = !in_double;
 		i++;
 	}
-	if ((unsigned char)c == '\0')
-		return ((char *)(&s[i]));
+	if (in_single || in_double)
+		return (1);
 	return (0);
 }

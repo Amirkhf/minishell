@@ -6,7 +6,7 @@
 /*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:38:15 by amary             #+#    #+#             */
-/*   Updated: 2026/03/19 18:46:09 by amary            ###   ########.fr       */
+/*   Updated: 2026/03/30 17:05:44 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void	fill_cmd(t_data *data, t_cmd *cmd, t_token **tok_cpy)
 	}
 	cmd->args[i] = NULL;
 }
+
 void	build_cmds(t_data *data)
 {
 	t_token	*tok_cpy;

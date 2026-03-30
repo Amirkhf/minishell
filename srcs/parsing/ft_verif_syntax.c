@@ -6,7 +6,7 @@
 /*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 17:51:20 by amary             #+#    #+#             */
-/*   Updated: 2026/03/28 17:55:58 by amary            ###   ########.fr       */
+/*   Updated: 2026/03/30 17:10:03 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,22 @@
 
 int	ft_verif_syntax(t_token *tmp)
 {
-	if (tmp->type == PIPE) 
+	if (tmp->type == PIPE)
 	{
-    	if (tmp->next == NULL || tmp->next->type == PIPE)
-    		return (syntax_error("newline"), EXIT_FAILURE);
+		if (tmp->next == NULL || tmp->next->type == PIPE)
+		{
+			syntax_error("newline");
+			return (EXIT_FAILURE);
+		}
 	}
 	else if (tmp->type > PIPE && tmp->type <= APPEND)
 	{
-    	if (tmp->next == NULL || (tmp->next->type >= PIPE && tmp->next->type <= APPEND))
-    		return (syntax_error("newline"), EXIT_FAILURE);
+		if (tmp->next == NULL || (tmp->next->type >= PIPE
+				&& tmp->next->type <= APPEND))
+		{
+			syntax_error("newline");
+			return (EXIT_FAILURE);
+		}
 	}
-	return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }

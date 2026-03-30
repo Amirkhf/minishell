@@ -6,7 +6,7 @@
 /*   By: amary <amary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 08:29:06 by amkhelif          #+#    #+#             */
-/*   Updated: 2026/03/28 17:31:45 by amary            ###   ########.fr       */
+/*   Updated: 2026/03/30 17:15:58 by amary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int			take_cmd(t_data *data, int *i);
 bool		add_token(t_data *data, t_token **t_lst, t_token_type type,
 				char *val);
 bool		is_operator(char *line);
-char	*ft_strchr(const char *s, int c);
+char		*ft_strchr(const char *s, int c);
 bool		is_space(char c);
 char		*expander(t_data *data);
 char		*extract_var_name(t_data *data, char *str, int *i);
@@ -163,6 +163,8 @@ void		heredoc_child(int fd, t_redir *redir);
 int			action_heredoc2(t_redir *redir);
 void		ft_export(t_data *data, t_cmd *cmd);
 int			to_many_arg(t_data *data, t_cmd *cmd);
+void		retokenize_expanded_str(t_data *data, t_token **token, char *str);
+int			is_in_quotes(char *str);
 void		retokenize_expanded_str(t_data *data, t_token **token, char *str);
 int			is_in_quotes(char *str);
 
